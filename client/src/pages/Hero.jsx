@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div
-      className={`bg-primary w-full h-screen overflow-hidden ${styles.flexStart}`}
+      className={`bg-primary w-full min-h-screen overflow-hidden ${styles.flexStart}`}
     >
       <div className={`${styles.boxWidth}`}>
         <section
@@ -59,7 +59,7 @@ const Hero = () => {
             {/* gradient end */}
           </div>
 
-          <div className={`ss:hidden ${styles.flexCenter}`}>
+          <div className={`ss:hidden mb-1 ${styles.flexCenter}`}>
             <Link to="/code-snippets">
               <GetStarted />
             </Link>
