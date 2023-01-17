@@ -9,7 +9,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className='w-full flex py-4 justify-between items-center navbar px-8'>
+    <nav className='w-full flex py-4 justify-between items-center navbar pl-8 pr-3'>
       <Link to='/'>
         <span className='font-poppins font-[700] cursor-pointer text-[20px] text-gradient'>
           CodeHub {"{}"}
