@@ -2,13 +2,19 @@ import styles from "../style";
 import { socialMedia } from "../constants";
 
 const Footer = () => (
-  <section className={`${styles.flexCenter} pb-4 flex-col`}>
-    <div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#3F3E45]">
-      <p className="font-poppins font-normal text-center text-[18px] leading-[27px] text-white">
-        Copyright Ⓒ 2022 CodeHub. All Rights Reserved.
+  <section className={`${styles.flexCenter} py-4 mx-4 flex-col`}>
+    <div className='flex justify-between items-center md:flex-row flex-col p-2 px-4 border-t-[1px] border-t-text-gradient  absolute bottom-2 w-[90vw]'>
+      <p className='font-poppins font-normal text-center text-[16px] leading-[27px] text-white'>
+        Copyright Ⓒ 2022. All Rights Reserved.{" "}
+        <span className='text-gradient font-medium text-[18px]'>CodeHub</span>{" "}
+        {"</>"} by{" "}
+        <span className='text-gradient font-medium text-[18px]'>
+          {" "}
+          Md Anzar Ahmad
+        </span>
       </p>
 
-      <div className="flex flex-row md:mt-0 mt-4">
+      <div className='flex flex-row md:mt-0 mt-4'>
         {socialMedia.map((social, index) => (
           <img
             key={social.id}
