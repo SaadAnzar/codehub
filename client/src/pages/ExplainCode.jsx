@@ -106,7 +106,7 @@
 // export default ExplainCode;
 
 import React, { useRef } from "react";
-import CodeMirror from "codemirror";
+// import CodeMirror from "codemirror";
 // import "codemirror/lib/codemirror.css";
 // import "codemirror/mode/javascript/javascript";
 // import "codemirror/mode/python/python";
