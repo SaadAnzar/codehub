@@ -9,7 +9,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className='w-full flex py-4 justify-between items-center navbar pl-8 pr-3'>
+    <nav className='bg-primary w-full flex py-4 justify-between items-center navbar px-8'>
       <Link to='/'>
         <span className='font-poppins font-[700] cursor-pointer text-[20px] text-gradient'>
           CodeHub {"{}"}
@@ -34,7 +34,7 @@ const Navbar = () => {
         ))}
       </ul>
 
-      <div className='sm:hidden flex flex-1 justify-end items-center mr-6'>
+      <div className='sm:hidden flex flex-1 justify-end items-center'>
         <img
           src={toggle ? close : menu}
           alt='menu'

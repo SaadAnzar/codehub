@@ -2,8 +2,8 @@ import styles from "../style";
 import { socialMedia } from "../constants";
 
 const Footer = () => (
-  <section className={`${styles.flexCenter} py-4 mx-4 flex-col`}>
-    <div className='flex justify-between items-center md:flex-row flex-col p-2 px-4 border-t-[1px] border-t-text-gradient  absolute bottom-2 w-[90vw]'>
+  <section className={`${styles.flexCenter} flex-col`}>
+    <div className='flex justify-between items-center md:flex-row flex-col p-3 border-t-[1px] border-t-text-gradient absolute bottom-2 w-[92vw]'>
       <p className='font-poppins font-normal text-center text-[16px] leading-[27px] text-white'>
         Copyright Ⓒ 2022. All Rights Reserved.{" "}
         <span className='text-gradient font-medium text-[18px]'>CodeHub</span>{" "}
