@@ -5,7 +5,7 @@ import github from "../assets/github.svg";
 
 export const navLinks = [
   // {
-  //   id: "codeSnippets",
+  //   id: "codesnippets",
   //   title: "Code Snippets",
   // },
   {
