@@ -22,7 +22,7 @@ const Home = () => {
                 <span>The Next Generation</span>{" "}
               </h1>
               <div className='ss:flex hidden md:mr-4 mr-0'>
-                <Link to='/autoCode'>
+                <Link to='/autocode'>
                   <GetStarted />
                 </Link>
               </div>
@@ -60,7 +60,7 @@ const Home = () => {
           </div>
 
           <div className={`ss:hidden mb-1 ${styles.flexCenter}`}>
-            <Link to='/autoCode'>
+            <Link to='/autocode'>
               <GetStarted />
             </Link>
           </div>

@@ -9,15 +9,15 @@ export const navLinks = [
   //   title: "Code Snippets",
   // },
   {
-    id: "autoCode",
+    id: "autocode",
     title: "Auto Code",
   },
   {
-    id: "explainCode",
+    id: "explaincode",
     title: "Explain Code",
   },
   {
-    id: "translateCode",
+    id: "translatecode",
     title: "Translate Code",
   },
 ];

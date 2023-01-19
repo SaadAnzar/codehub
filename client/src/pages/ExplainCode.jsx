@@ -1,188 +1,115 @@
-// import React, { useState } from "react";
-// import Navbar from "../components/Navbar";
-// import Footer from "../components/Footer";
-// import axios from "axios";
-// import MyCodeBlock from "../components/MyCodeBlock";
-// import CodeInput from "../components/CodeInput";
-// import { Controlled as CodeMirror } from "react-codemirror2";
-// import LanguageDetect from "languagedetect";
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Editor from "react-simple-code-editor";
+import { highlight, languages } from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+import axios from "axios";
 
-// import "codemirror/lib/codemirror.css";
-// import "codemirror/theme/material.css";
+const codeSnippet = `function add(a, b) {
+  return a + b;
+}
 
-// const lngDetector = new LanguageDetect();
+add(5, 10);
+// Output: 15
+`;
 
-// const ExplainCode = () => {
-//   const [code, setCode] = useState("");
-//   const [output, setOutput] = useState("");
-//   const [language, setLanguage] = useState("javascript");
-
-//   const detectLanguage = (code) => {
-//     const detectedLanguage = lngDetector.detect(code);
-//     setLanguage(detectedLanguage);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     axios
-//       .post("http://localhost:5000/explaincode", {
-//         prompt: code,
-//       })
-//       .then((res) => {
-//         setOutput(res.data.output);
-//         console.log(res.data.output);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-//   return (
-//     <div className='bg-primary h-screen overflow-hidden'>
-//       <Navbar />
-//       <div className='mx-5 sm:mx-20 mt-5 bg-neutral-900 rounded-lg'>
-//         <div>
-//           <CodeMirror
-//             value={code}
-//             options={{
-//               mode: language,
-//               theme: "material",
-//               lineNumbers: true,
-//             }}
-//             onBeforeChange={(editor, data, value) => {
-//               setCode(value);
-//               detectLanguage(value);
-//             }}
-//             onChange={(editor, data, value) => {}}
-//             onClick={handleSubmit}
-//           />
-//         </div>
-
-//         {/* <div className='bg-neutral-700 rounded-lg'>
-//           <form onSubmit={handleSubmit} className=''>
-//             <div className='px-4 py-2 flex items-center'>
-//               <input
-//                 type='text'
-//                 value={input}
-//                 placeholder='Wite your prompt to generate code...'
-//                 onChange={(event) =>
-//                   setInput(
-//                     event.target.value.charAt(0).toUpperCase() +
-//                       event.target.value.slice(1)
-//                   )
-//                 }
-//                 className='bg-inherit border-none outline-none text-white w-full '
-//               />
-//               <button type='submit' className='ml-2 text-slate-300'>
-//                 <svg
-//                   xmlns='http://www.w3.org/2000/svg'
-//                   fill='bg-gray-700'
-//                   viewBox='0 0 24 24'
-//                   strokeWidth='1.5'
-//                   stroke='currentColor'
-//                   className='w-6 h-6'
-//                 >
-//                   <path
-//                     strokeLinecap='round'
-//                     strokeLinejoin='round'
-//                     d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5'
-//                   />
-//                 </svg>
-//               </button>
-//             </div>
-//           </form>
-//         </div> */}
-//         {/* <CodeInput /> */}
-//         {/* <MyCodeBlock code={output} /> */}
-//         <div>
-//           <h1 className='3xl text-white'>{output}</h1>
-//         </div>
-//       </div>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default ExplainCode;
-
-import React, { useRef } from "react";
-// import CodeMirror from "codemirror";
-// import "codemirror/lib/codemirror.css";
-// import "codemirror/mode/javascript/javascript";
-// import "codemirror/mode/python/python";
-// import "codemirror/mode/xml/xml";
-// import "codemirror/mode/htmlmixed/htmlmixed";
-// import "codemirror/mode/css/css";
+const explainedCode = `• This code is a function called "add" that takes two parameters, "a" and "b". 
+• The function adds the two parameters together and returns the result. 
+• In this example, the parameters are 5 and 10, so the result of the function is 15.`;
 
 const ExplainCode = () => {
-  const editorRef = useRef(null);
+  const [code, setCode] = useState(codeSnippet);
+  const [output, setOutput] = useState(explainedCode);
 
-  const handleCodeChange = (editor, data, code) => {
-    // Send code to OpenAI model for explanation
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("https://codehub-8sr2.onrender.com/explaincode", {
+        prompt: code,
+      })
+      .then((res) => {
+        setOutput(res.data.output);
+        console.log(res.data.output);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const codeEditorRef = useRef(null);
-  useEffect(() => {
-    codeEditorRef.current = CodeMirror(editorRef.current, {
-      mode: "text/plain",
-      lineNumbers: true,
-      lineWrapping: true,
-      autoCloseBrackets: true,
-      matchBrackets: true,
-      styleActiveLine: true,
-      gutters: ["CodeMirror-lint-markers"],
-      lint: true,
-      theme: "material",
-      indentWithTabs: false,
-      extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-S": function (cm) {
-          handleCodeChange(cm);
-        },
-        "Ctrl-J": "toMatchingTag",
-      },
-      hintOptions: {
-        completeSingle: false,
-        alignWithWord: true,
-        closeCharacters: /[\s()\[\]{};:>,]/,
-        closeOnUnfocus: true,
-        completeOnSingleClick: true,
-        container: document.body,
-      },
-      onChange: function (cm) {
-        cm.save();
-      },
-    });
-    codeEditorRef.current.on("change", function (instance, changeObj) {
-      if (changeObj.text.length === 1 && changeObj.text[0] === "`") {
-        codeEditorRef.current.setOption("mode", "text/x-sql");
-      }
-      if (changeObj.text.length === 1 && changeObj.text[0] === "#") {
-        codeEditorRef.current.setOption("mode", "python");
-      }
-      if (
-        changeObj.text.length === 2 &&
-        changeObj.text[0] === "<" &&
-        changeObj.text[1] === "!"
-      ) {
-        codeEditorRef.current.setOption("mode", "text/html");
-      }
-      if (
-        changeObj.text.length === 2 &&
-        changeObj.text[0] === "{" &&
-        changeObj.text[1] === "{"
-      ) {
-        codeEditorRef.current.setOption("mode", "javascript");
-      }
-    });
-  }, []);
-
   return (
-    <div>
-      <div ref={editorRef} />
-      <button onClick={() => handleCodeChange(codeEditorRef.current)}>
-        Explain Code
-      </button>
+    <div className='bg-primary w-full h-screen overflow-hidden'>
+      <Navbar />
+      <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>
+        <div className='sm:w-[40vw]'>
+          <div className='App'>
+            <div className='window'>
+              <div className='title-bar'>
+                <div className='title-buttons'>
+                  <div className='title-button'></div>
+                  <div className='title-button'></div>
+                  <div className='title-button'></div>
+                </div>
+              </div>
+              <div className='editor_wrap'>
+                <Editor
+                  value={code}
+                  onValueChange={(code) => setCode(code)}
+                  highlight={(code) => highlight(code, languages.js)}
+                  padding={10}
+                  style={{
+                    fontFamily: '"Fira code", "Fira Mono", monospace',
+                    fontSize: 12,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            className='m-2 text-slate-300 bg-black-gradient border rounded-md px-4 py-2 font-medium text-base
+          hover:text-slate-500 focus:outline-none'
+          >
+            Explain {""}
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='bg-gray-700'
+              viewBox='0 0 24 24'
+              strokeWidth='1.5'
+              stroke='currentColor'
+              className='w-[18px] h-[18px] inline-block'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5'
+              />
+            </svg>
+          </button>
+        </div>
+        <div className='sm:w-[40vw] sm:h-[calc(60vh+40px)] my-2 rounded-lg bg-[#1a1e22] text-gray-300'>
+          <div className='title-bar'>
+            <div className='title-buttons'>
+              <div className='px-5'>Explanation</div>
+            </div>
+          </div>
+          <div className='sm:h-[60vh] h-[27vh] overflow-auto'>
+            <ul className='px-5 py-3'>
+              {output.split("\n").map((out, index) => {
+                return (
+                  <li className='p-2' key={index}>
+                    {out}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };

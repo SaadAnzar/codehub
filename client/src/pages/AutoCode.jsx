@@ -2,11 +2,28 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from "axios";
-import MyCodeBlock from "../components/MyCodeBlock";
+import Editor from "react-simple-code-editor";
+import { highlight, languages } from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+
+const inputPrompt = `Write code to setup an express app`;
+
+const outputCode = `
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  console.log('Server is listening on port 3000');
+});`;
 
 const AutoCode = () => {
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
+  const [input, setInput] = useState(inputPrompt);
+  const [output, setOutput] = useState(outputCode);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,10 +40,12 @@ const AutoCode = () => {
         console.log(err);
       });
   };
+
   return (
-    <div className='bg-primary h-screen overflow-hidden'>
+    <div className='bg-primary w-full h-screen overflow-hidden'>
       <Navbar />
-      <div className='mx-5 sm:mx-20 mt-5 bg-neutral-900 rounded-lg'>
+      <div className='mx-5 sm:mx-20 mt-5  rounded-lg'>
+        {/* <========== Input Form ===========> */}
         <div className='bg-neutral-700 rounded-lg'>
           <form onSubmit={handleSubmit} className=''>
             <div className='px-4 py-2 flex items-center'>
@@ -61,7 +80,31 @@ const AutoCode = () => {
             </div>
           </form>
         </div>
-        <MyCodeBlock code={output} />
+        {/* <========== Input Form ===========> */}
+
+        {/* <============= CodeViewer =============> */}
+        <div className='relative my-2 rounded-lg bg-[#1a1e22] text-white'>
+          <div className='title-bar'>
+            <div className='title-buttons'>
+              <div className='title-button'></div>
+              <div className='title-button'></div>
+              <div className='title-button'></div>
+            </div>
+          </div>
+          <div className='max-h-[65vh] overflow-auto pb-2 px-4'>
+            <Editor
+              value={output}
+              onValueChange={(output) => setCode(output)}
+              highlight={(output) => highlight(output, languages.js)}
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 12,
+              }}
+            />
+          </div>
+        </div>
+        {/* <=========== CodeViewer ===========> */}
       </div>
       <Footer />
     </div>
