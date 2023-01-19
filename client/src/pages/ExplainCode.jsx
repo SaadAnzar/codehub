@@ -7,7 +7,8 @@ import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import axios from "axios";
 
-const codeSnippet = `function add(a, b) {
+const codeSnippet = `
+function add(a, b) {
   return a + b;
 }
 
@@ -32,7 +33,7 @@ const ExplainCode = () => {
       })
       .then((res) => {
         setOutput(res.data.output);
-        console.log(res.data.output);
+        // console.log(res.data.output);
       })
       .catch((err) => {
         console.log(err);

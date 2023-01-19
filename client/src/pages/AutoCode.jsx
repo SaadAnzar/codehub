@@ -34,7 +34,7 @@ const AutoCode = () => {
       })
       .then((res) => {
         setOutput(res.data.output);
-        console.log(res.data.output);
+        // console.log(res.data.output);
       })
       .catch((err) => {
         console.log(err);

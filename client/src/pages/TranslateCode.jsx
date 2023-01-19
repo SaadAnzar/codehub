@@ -11,55 +11,44 @@ const codeSnippet = `
 #include <iostream>
 using namespace std;
 
-int binarySearch(int arr[], int l, int r, int x) {
-    while (l <= r) {
-        int m = l + (r - l) / 2;
-        if (arr[m] == x) 
-            return m;  
-        if (arr[m] < x) 
-            l = m + 1; 
-        else
-            r = m - 1;
+int main()
+{
+    int num, reversedNum = 0, remainder;
+
+    cout << "Enter an integer: ";
+    cin >> num;
+
+    while(num != 0)
+    {
+        remainder = num % 10;
+        reversedNum = reversedNum * 10 + remainder;
+        num /= 10;
     }
-    return -1;
-}
-int main() {
-    int arr[] = { 2, 3, 4, 10, 40 };
-    int x = 10;
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int result = binarySearch(arr, 0, n - 1, x);
-    (result == -1) ? cout << "Element is not present in array"
-                   : cout << "Element is present at index " << result;
+
+    cout << "Reversed Number = " << reversedNum;
+
     return 0;
 }`;
 
 const translatedCode = `
-def binary_search(arr, l, r, x):
-    while l <= r:
-        m = l + (r - l) // 2
-        if arr[m] == x:
-            return m
-        elif arr[m] < x:
-            l = m + 1
-        else:
-            r = m - 1
-    return -1
+let num, reversedNum = 0, remainder;
 
-arr = [2, 3, 4, 10, 40]
-x = 10
-n = len(arr)
-result = binary_search(arr, 0, n - 1, x)
+console.log("Enter an integer: ");
+num = prompt();
 
-if result != -1:
-    print("Element is present at index", result)
-else:
-    print("Element is not present in array")`;
+while(num != 0) {
+    remainder = num % 10;
+    reversedNum = reversedNum * 10 + remainder;
+    num /= 10;
+}
+
+console.log("Reversed Number = " + reversedNum);`;
 
 const TranslateCode = () => {
   const [code, setCode] = useState(codeSnippet);
   const [output, setOutput] = useState(translatedCode);
   const [firstl, setFirstl] = useState("C++");
-  const [secondl, setSecondl] = useState("Python");
+  const [secondl, setSecondl] = useState("JavaScript");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +61,7 @@ const TranslateCode = () => {
       })
       .then((res) => {
         setOutput(res.data.output);
-        console.log(res.data.output);
+        // console.log(res.data.output);
       })
       .catch((err) => {
         console.log(err);
@@ -93,13 +82,8 @@ const TranslateCode = () => {
                     type='text'
                     value={firstl}
                     placeholder='Translate from...'
-                    onChange={(event) =>
-                      setFirstl(
-                        event.target.value.charAt(0).toUpperCase() +
-                          event.target.value.slice(1)
-                      )
-                    }
-                    className='bg-inherit border-none outline-none text-white w-full '
+                    onChange={(event) => setFirstl(event.target.value)}
+                    className='bg-inherit border-none outline-none text-white w-full capitalize'
                   />
                 </div>
               </div>
@@ -149,13 +133,8 @@ const TranslateCode = () => {
                     type='text'
                     value={secondl}
                     placeholder='Translate to...'
-                    onChange={(event) =>
-                      setSecondl(
-                        event.target.value.charAt(0).toUpperCase() +
-                          event.target.value.slice(1)
-                      )
-                    }
-                    className='bg-inherit border-none outline-none text-white w-full '
+                    onChange={(event) => setSecondl(event.target.value)}
+                    className='bg-inherit border-none outline-none text-white w-full capitalize'
                   />
                 </div>
               </div>

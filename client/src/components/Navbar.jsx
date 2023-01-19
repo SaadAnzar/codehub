@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import { navLinks } from "../constants";
@@ -7,6 +7,15 @@ import { navLinks } from "../constants";
 const Navbar = () => {
   const [active, setActive] = useState("Auto Code");
   const [toggle, setToggle] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const activeLink = navLinks.find(
+      (nav) => nav.id === location.pathname.substring(1)
+    );
+    setActive(activeLink ? activeLink.title : "Auto Code");
+  }, [location]);
 
   return (
     <nav className='bg-primary w-full flex py-4 justify-between items-center navbar px-8'>
