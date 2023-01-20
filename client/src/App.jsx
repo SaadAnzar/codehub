@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 // import CodeSnippets from "./pages/CodeSnippets";
 import AutoCode from "./pages/AutoCode";
@@ -13,10 +13,8 @@ const App = () => (
       <Route path='/autocode' element={<AutoCode />} />
       <Route path='/explaincode' element={<ExplainCode />} />
       <Route path='/translatecode' element={<TranslateCode />} />
+      <Route path='*' element={<p>Page not found</p>} />
     </Routes>
-    <Link to='/autocode'></Link>
-    <Link to='/explaincode'></Link>
-    <Link to='/translatecode'></Link>
   </BrowserRouter>
 );
 

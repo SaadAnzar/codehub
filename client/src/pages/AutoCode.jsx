@@ -29,7 +29,7 @@ const AutoCode = () => {
     e.preventDefault();
 
     axios
-      .post("https://codehub-8sr2.onrender.com/autocode", {
+      .post("https://codehub-8sr2.onrender.com/auto", {
         prompt: input,
       })
       .then((res) => {

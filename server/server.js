@@ -26,14 +26,14 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/autocode", async (req, res) => {
-  res.status(200).send({
-    message:
-      "Hello from CodeHub! The server is working fine. This is the AutoCode endpoint.",
-  });
-});
+// app.get("/auto", async (req, res) => {
+//   res.status(200).send({
+//     message:
+//       "Hello from CodeHub! The server is working fine. This is the AutoCode endpoint.",
+//   });
+// });
 
-app.post("/autocode", async (req, res) => {
+app.post("/auto", async (req, res) => {
   try {
     const auto = req.body.prompt;
 
@@ -56,14 +56,14 @@ app.post("/autocode", async (req, res) => {
   }
 });
 
-app.get("/explaincode", async (req, res) => {
-  res.status(200).send({
-    message:
-      "Hello from CodeHub! The server is working fine. This is the ExplainCode endpoint.",
-  });
-});
+// app.get("/explain", async (req, res) => {
+//   res.status(200).send({
+//     message:
+//       "Hello from CodeHub! The server is working fine. This is the ExplainCode endpoint.",
+//   });
+// });
 
-app.post("/explaincode", async (req, res) => {
+app.post("/explain", async (req, res) => {
   try {
     const explain = req.body.prompt;
 
@@ -86,14 +86,14 @@ app.post("/explaincode", async (req, res) => {
   }
 });
 
-app.get("/translatecode", async (req, res) => {
-  res.status(200).send({
-    message:
-      "Hello from CodeHub! The server is working fine. This is the TranslateCode endpoint.",
-  });
-});
+// app.get("/translate", async (req, res) => {
+//   res.status(200).send({
+//     message:
+//       "Hello from CodeHub! The server is working fine. This is the TranslateCode endpoint.",
+//   });
+// });
 
-app.post("/translatecode", async (req, res) => {
+app.post("/translate", async (req, res) => {
   try {
     const translate = req.body.prompt;
     const first_language = req.body.first_language;
