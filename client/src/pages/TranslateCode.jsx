@@ -54,7 +54,7 @@ const TranslateCode = () => {
     e.preventDefault();
 
     axios
-      .post("https://codehub-8sr2.onrender.com/translate", {
+      .post(import.meta.env.VITE_BACKEND_URL + "/translate", {
         prompt: code,
         first_language: firstl,
         second_language: secondl,

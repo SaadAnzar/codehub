@@ -28,7 +28,7 @@ const ExplainCode = () => {
     e.preventDefault();
 
     axios
-      .post("https://codehub-8sr2.onrender.com/explain", {
+      .post(import.meta.env.VITE_BACKEND_URL + "/explain", {
         prompt: code,
       })
       .then((res) => {
