@@ -28,7 +28,7 @@ const ExplainCode = () => {
     e.preventDefault();
 
     axios
-      .post(import.meta.env.VITE_BACKEND_URL + "/explain", {
+      .post("https://codehub-8sr2.onrender.com/explain", {
         prompt: code,
       })
       .then((res) => {
@@ -41,7 +41,7 @@ const ExplainCode = () => {
   };
 
   return (
-    <div className='bg-primary w-full h-screen overflow-hidden'>
+    <div className='bg-primary flex flex-col w-full h-screen overflow-hidden'>
       <Navbar />
       <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>
         <div className='sm:w-[40vw]'>
@@ -91,13 +91,13 @@ const ExplainCode = () => {
             </svg>
           </button>
         </div>
-        <div className='sm:w-[40vw] sm:h-[calc(60vh+40px)] my-2 rounded-lg bg-[#1a1e22] text-gray-300'>
+        <div className='sm:w-[40vw] sm:h-[calc(57vh+35px)] my-2 rounded-lg bg-[#1a1e22] text-gray-300'>
           <div className='title-bar'>
             <div className='title-buttons'>
               <div className='px-5'>Explanation</div>
             </div>
           </div>
-          <div className='sm:h-[60vh] h-[27vh] overflow-auto'>
+          <div className='sm:h-[57vh] h-[23vh] overflow-auto'>
             <ul className='px-5 py-3'>
               {output.split("\n").map((out, index) => {
                 return (

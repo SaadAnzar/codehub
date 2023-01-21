@@ -205,25 +205,26 @@
 }
 
 .editor_wrap {
-    height: 27vh;
+    height: 23vh;
     overflow: auto;
     padding-bottom: 0.5rem;
     padding-right: 1rem;
-    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 .editor_wrap textarea {
-    height: 27vh;
+    height: 23vh;
     outline: none;
 }
 
 @media screen and (min-width: 640px) {
     .editor_wrap {
-        height: 60vh;
+        height: 56vh;
     }
 
     .editor_wrap textarea {
-        height: 60vh;
+        height: 56vh;
+        outline: none;
     }
 }
 

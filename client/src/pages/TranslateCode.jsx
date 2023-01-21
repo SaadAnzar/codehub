@@ -54,7 +54,7 @@ const TranslateCode = () => {
     e.preventDefault();
 
     axios
-      .post(import.meta.env.VITE_BACKEND_URL + "/translate", {
+      .post("https://codehub-8sr2.onrender.com/translate", {
         prompt: code,
         first_language: firstl,
         second_language: secondl,
@@ -69,7 +69,7 @@ const TranslateCode = () => {
   };
 
   return (
-    <div className='bg-primary w-full h-screen overflow-hidden'>
+    <div className='bg-primary flex flex-col w-full min-h-screen overflow-hidden'>
       <Navbar />
 
       <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>

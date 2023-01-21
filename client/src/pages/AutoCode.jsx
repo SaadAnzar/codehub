@@ -29,7 +29,7 @@ const AutoCode = () => {
     e.preventDefault();
 
     axios
-      .post(import.meta.env.VITE_BACKEND_URL + "/auto", {
+      .post("https://codehub-8sr2.onrender.com/auto", {
         prompt: input,
       })
       .then((res) => {
@@ -42,9 +42,9 @@ const AutoCode = () => {
   };
 
   return (
-    <div className='bg-primary w-full h-screen overflow-hidden'>
+    <div className='bg-primary flex flex-col w-full min-h-screen overflow-hidden'>
       <Navbar />
-      <div className='mx-5 sm:mx-20 mt-5  rounded-lg'>
+      <div className='mx-5 sm:mx-20 mt-5 rounded-lg'>
         {/* <========== Input Form ===========> */}
         <div className='bg-neutral-700 rounded-lg'>
           <form onSubmit={handleSubmit} className=''>
@@ -91,7 +91,7 @@ const AutoCode = () => {
               <div className='title-button'></div>
             </div>
           </div>
-          <div className='max-h-[65vh] overflow-auto pb-2 px-4'>
+          <div className='max-h-[57vh] overflow-auto pb-2 px-4 outline-none'>
             <Editor
               value={output}
               onValueChange={(output) => setCode(output)}
