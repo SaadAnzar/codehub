@@ -41,7 +41,7 @@ const ExplainCode = () => {
   };
 
   return (
-    <div className='bg-primary flex flex-col w-full h-screen overflow-hidden'>
+    <div className='bg-primary flex flex-col w-full h-screen'>
       <Navbar />
       <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>
         <div className='sm:w-[40vw]'>
