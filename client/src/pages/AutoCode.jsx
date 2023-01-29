@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from "axios";
@@ -21,6 +21,9 @@ app.listen(3000, () => {
 });`;
 
 const AutoCode = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [input, setInput] = useState(inputPrompt);
   const [output, setOutput] = useState(outputCode);
 
@@ -43,7 +46,7 @@ const AutoCode = () => {
   return (
     <div className='bg-primary flex flex-col w-full min-h-screen'>
       <Navbar />
-      <div className='mx-5 sm:mx-20 mt-5 rounded-lg'>
+      <div className='mx-6 sm:mx-20 my-4 rounded-lg'>
         {/* <========== Input Form ===========> */}
         <div className='bg-neutral-700 rounded-lg'>
           <form onSubmit={handleSubmit} className=''>
@@ -82,7 +85,7 @@ const AutoCode = () => {
         {/* <========== Input Form ===========> */}
 
         {/* <============= CodeViewer =============> */}
-        <div className='relative my-2 rounded-lg bg-[#1a1e22] text-white'>
+        <div className='window'>
           <div className='title-bar'>
             <div className='title-buttons'>
               <div className='title-button'></div>
@@ -90,7 +93,7 @@ const AutoCode = () => {
               <div className='title-button'></div>
             </div>
           </div>
-          <div className='max-h-[57vh] overflow-auto pb-2 px-4 outline-none'>
+          <div className='editor_wrap'>
             <Editor
               value={output}
               onValueChange={(output) => setCode(output)}

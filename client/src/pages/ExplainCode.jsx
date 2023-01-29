@@ -97,13 +97,13 @@ const ExplainCode = () => {
             </svg>
           </button>
         </div>
-        <div className='sm:w-[40vw] sm:h-[calc(57vh+35px)] my-2 rounded-lg bg-[#1a1e22] text-gray-300'>
+        <div className='sm:w-[40vw] sm:h-[calc(58vh+35px)] my-2 rounded-lg bg-[#1a1e22] text-gray-300'>
           <div className='title-bar'>
             <div className='title-buttons'>
               <div className='px-5'>Explanation</div>
             </div>
           </div>
-          <div className='sm:h-[57vh] h-auto overflow-auto'>
+          <div className='sm:h-[56vh] h-auto overflow-auto'>
             <ul className='px-5 py-3'>
               {output.split("\n").map((out, index) => {
                 return (
