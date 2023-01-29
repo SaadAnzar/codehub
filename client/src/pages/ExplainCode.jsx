@@ -7,18 +7,24 @@ import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import axios from "axios";
 
-const codeSnippet = `
-function add(a, b) {
-  return a + b;
-}
+const codeSnippet = `def factorial(n):
+if n == 0:
+    return 1
+else:
+    return n * factorial(n-1)
 
-add(5, 10);
-// Output: 15
+num = int(input("Enter a number: "));
+
+print("The factorial of", num, "is", factorial(num));
 `;
 
-const explainedCode = `• This code is a function called "add" that takes two parameters, "a" and "b". 
-• The function adds the two parameters together and returns the result. 
-• In this example, the parameters are 5 and 10, so the result of the function is 15.`;
+const explainedCode = `• This code is used to calculate the factorial of a given number.
+• The function 'factorial' takes an argument 'n' and checks if it is equal to 0.
+• If it is equal to 0, it returns 1.
+• If it is not equal to 0, it returns the value of 'n' multiplied by the result of the same function with argument 'n-1'.
+• The variable 'num' is used to store the input from the user.
+• The input is taken as an integer and stored in the variable 'num'.
+• Finally, the factorial of the number stored in 'num' is calculated using the function 'factorial' and printed out.`;
 
 const ExplainCode = () => {
   const [code, setCode] = useState(codeSnippet);
@@ -41,7 +47,7 @@ const ExplainCode = () => {
   };
 
   return (
-    <div className='bg-primary flex flex-col w-full h-screen'>
+    <div className='bg-primary flex flex-col w-full min-h-screen'>
       <Navbar />
       <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>
         <div className='sm:w-[40vw]'>
@@ -97,7 +103,7 @@ const ExplainCode = () => {
               <div className='px-5'>Explanation</div>
             </div>
           </div>
-          <div className='sm:h-[57vh] h-[23vh] overflow-auto'>
+          <div className='sm:h-[57vh] h-auto overflow-auto'>
             <ul className='px-5 py-3'>
               {output.split("\n").map((out, index) => {
                 return (

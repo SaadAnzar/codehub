@@ -129,6 +129,25 @@
     filter: blur(750px);
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #33bbcf;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #def9fa;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #7de7eb;
+}
 
 
 /* Code Editor */
@@ -205,7 +224,7 @@
 }
 
 .editor_wrap {
-    height: 23vh;
+    height: auto;
     overflow: auto;
     padding-bottom: 0.5rem;
     padding-right: 1rem;
@@ -213,17 +232,17 @@
 }
 
 .editor_wrap textarea {
-    height: 23vh;
+    height: auto;
     outline: none;
 }
 
 @media screen and (min-width: 640px) {
     .editor_wrap {
-        height: 56vh;
+        height: 57vh;
     }
 
     .editor_wrap textarea {
-        height: 56vh;
+        height: 57vh;
         outline: none;
     }
 }

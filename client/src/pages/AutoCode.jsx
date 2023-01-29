@@ -9,8 +9,7 @@ import "prismjs/components/prism-javascript";
 
 const inputPrompt = `Write code to setup an express app`;
 
-const outputCode = `
-const express = require('express');
+const outputCode = `const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {

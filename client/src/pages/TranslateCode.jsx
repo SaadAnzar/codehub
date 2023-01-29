@@ -7,8 +7,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const codeSnippet = `
-#include <iostream>
+const codeSnippet = `#include <iostream>
 using namespace std;
 
 int main()
@@ -18,20 +17,16 @@ int main()
     cout << "Enter an integer: ";
     cin >> num;
 
-    while(num != 0)
-    {
+    while(num != 0) {
         remainder = num % 10;
         reversedNum = reversedNum * 10 + remainder;
         num /= 10;
     }
-
     cout << "Reversed Number = " << reversedNum;
-
     return 0;
 }`;
 
-const translatedCode = `
-let num, reversedNum = 0, remainder;
+const translatedCode = `let num, reversedNum = 0, remainder;
 
 console.log("Enter an integer: ");
 num = prompt();

@@ -3,7 +3,7 @@ import { socialMedia } from "../constants";
 
 const Footer = () => (
   <footer
-    className={`${styles.flexCenter} flex-col bg-primary absolute bottom-0 w-full`}
+    className={`${styles.flexCenter} bg-primary absolute bottom-0 w-full sm:inline-flex hidden`}
   >
     <div className='flex justify-between items-center md:flex-row flex-col px-3 py-2 border-t-[1px] border-t-text-gradient w-[92vw]'>
       <p className='font-poppins font-normal text-center text-[12px] leading-[25px] text-white'>
