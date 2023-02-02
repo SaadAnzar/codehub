@@ -20,7 +20,7 @@ const Chatbot = () => {
     setChats([...chats, { message: input, author: "user" }]);
 
     axios
-      .post("http://localhost:5000/chat", {
+      .post("https://codehub-8sr2.onrender.com/chat", {
         prompt: input,
       })
       .then((res) => {
