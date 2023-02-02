@@ -25,7 +25,7 @@ app.get("/", async (req, res) => {
 app.post("/chat", async (req, res) => {
   try {
     const chat = req.body.prompt;
-    console.log(chat);
+    // console.log(chat);
 
     const response = await openai.createCompletion({
       model: "text-davinci-003",
