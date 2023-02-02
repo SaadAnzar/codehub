@@ -1,9 +1,13 @@
+import React, { useEffect } from "react";
 import styles from "../style";
 import ai from "../assets/ai.png";
 import GetStarted from "../components/GetStarted";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div
       className={`bg-primary w-full min-h-screen overflow-hidden ${styles.flexStart}`}

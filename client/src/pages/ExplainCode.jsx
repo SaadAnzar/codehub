@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Editor from "react-simple-code-editor";
@@ -27,6 +27,9 @@ const explainedCode = `• This code is used to calculate the factorial of a giv
 • Finally, the factorial of the number stored in 'num' is calculated using the function 'factorial' and printed out.`;
 
 const ExplainCode = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [code, setCode] = useState(codeSnippet);
   const [output, setOutput] = useState(explainedCode);
 

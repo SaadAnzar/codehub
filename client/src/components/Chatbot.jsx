@@ -20,11 +20,11 @@ const Chatbot = () => {
     setChats([...chats, { message: input, author: "user" }]);
 
     axios
-      .post("http://127.0.0.1:5000/chat", {
-        message: input,
+      .post("http://localhost:5000/chat", {
+        prompt: input,
       })
       .then((res) => {
-        console.log("ass", res.data.Answer);
+        // console.log("ass", res.data.Answer);
         const Answer = res.data.Answer;
         setChats([
           ...chats,
@@ -34,14 +34,14 @@ const Chatbot = () => {
         setInput("");
       })
       .catch((error) => {
-        console.log("bruh", error);
+        console.log(error);
       });
   };
 
   return (
     <div className='mx-2'>
-      <div className='bg-gray-gradient rounded-lg z-1 drop-shadow-md w-[30%]'>
-        <form onSubmit={handleSubmit} className=''>
+      <div className='bg-gray-gradient rounded-lg z-1 drop-shadow-md w-full'>
+        <form onSubmit={handleSubmit} className='my-2'>
           <div className='px-4 py-2 flex items-center'>
             <input
               type='text'
@@ -76,17 +76,17 @@ const Chatbot = () => {
       </div>
       <div
         ref={chatContainerRef}
-        className='max-h-[60vh] bg-gray-gradient rounded-lg shadow-lg mx-2 overflow-y-auto scroll-smooth'
+        className='max-h-[64vh] bg-gray-gradient rounded-lg shadow-lg overflow-y-auto scroll-smooth'
       >
         {chats.map((chat, index) => (
           <div
             key={index}
-            className={`py-0.5 rounded-lg mx-2.5 my-2 ${
+            className={`rounded-lg mx-1.5 my-1.5 ${
               chat.author === "user" ? "text-right" : "text-left"
             }`}
           >
             <span
-              className={`inline-block px-2 py-1 leading-8 text-m rounded-lg ${
+              className={`inline-block px-1.5 py-0.5 text-base rounded-lg ${
                 chat.author === "user" ? "bg-gray-700" : "bg-[#147efb]"
               }`}
             >

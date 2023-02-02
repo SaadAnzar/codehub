@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { programmingLangs } from "../constants";
+// import { programmingLangs } from "../constants";
 import { programmingSnippets } from "../constants";
-import { Link } from "react-router-dom";
 import avatar from "../assets/avatar.svg";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
@@ -12,6 +11,9 @@ import "prismjs/components/prism-javascript";
 import Chatbot from "../components/chatbot";
 
 const CodeSnippets = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [showModal, setShowModal] = useState(false);
   const [selectedSnippet, setSelectedSnippet] = useState(null);
 
@@ -24,35 +26,49 @@ const CodeSnippets = () => {
     <div className='bg-primary flex flex-col w-full min-h-screen text-gray-200'>
       <Navbar />
       <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>
-        <div className='sm:w-[15%]'>
+        {/* ====== Languages ====== */}
+        {/* <div className='sm:w-[15%]'>
           <div className='font-poppins font-medium text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-xl'>
             Languages
           </div>
+          <div className=' sm:h-[70vh] h-auto overflow-auto'>
+            <ul className='list-none'>
+              {programmingLangs.map((langs) => (
+                <li
+                  key={langs.title}
+                  className='font-poppins font-medium text-base'
+                >
+                  <div className='inline-flex m-4'>
+                    <img
+                      src={`${langs.icon}`}
+                      alt={`${langs.id}`}
+                      className='w-[28px] h-[28px] object-contain mr-4'
+                    />
+                    {langs.title}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div> */}
+        {/* ====== End Languages ====== */}
 
-          <ul className='list-none'>
-            {programmingLangs.map((langs) => (
-              <li
-                key={langs.title}
-                className='font-poppins font-medium text-base'
-              >
-                <div className='inline-flex m-4'>
-                  <img
-                    src={`${langs.icon}`}
-                    alt={`${langs.id}`}
-                    className='w-[28px] h-[28px] object-contain mr-4'
-                  />
-                  {langs.title}
-                </div>
-              </li>
-            ))}
-          </ul>
+        {/* ====== Chatbot ====== */}
+        <div className='sm:w-[40%] sm:order-2 sm:mr-16 sm:mb-0 mb-6'>
+          <div className='font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-lg'>
+            CodeHub Chatbot
+          </div>
+          <Chatbot />
         </div>
-        <div className='sm:w-[35%]'>
+        {/* ====== End Chatbot ====== */}
+
+        {/* ====== Code Snippets ====== */}
+        <div className='sm:w-[40%] sm:order-1 sm:ml-16'>
           <div className='font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-lg'>
             Code Snippets
           </div>
           <div className='overflow-auto'>
-            <div className='sm:h-[71vh] h-auto'>
+            <div className='sm:h-[70vh] h-auto overflow-auto'>
               <ul>
                 {programmingSnippets.map((snippets) => (
                   <li key={snippets.id} onClick={() => handleClick(snippets)}>
@@ -84,9 +100,12 @@ const CodeSnippets = () => {
             </div>
           </div>
         </div>
+        {/* ====== End Code Snippets ====== */}
+
+        {/* ====== Modal ====== */}
         {showModal && (
-          <div className='fixed top-[10vh] left-[20vw] w-full h-full justify-center'>
-            <div className='absolute rounded-lg overflow-hidden bg-[#1a1e22] w-[40%] h-[80vh] text-center'>
+          <div className='fixed top-[10vh] w-full justify-center'>
+            <div className='rounded-lg overflow-hidden bg-[#1a1e22] sm:w-[45%] w-[90%] sm:h-[80vh] h-[70vh] text-center'>
               <div className='title-bar'>
                 <div className='p-2'>
                   {selectedSnippet && selectedSnippet.title}
@@ -113,12 +132,7 @@ const CodeSnippets = () => {
             </div>
           </div>
         )}
-        <div className='sm:w-[30%]'>
-          <div className='font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-lg'>
-            CodeHub Chatbot
-          </div>
-          <Chatbot />
-        </div>
+        {/* ====== End Modal ====== */}
       </div>
       <Footer />
     </div>
