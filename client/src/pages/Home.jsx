@@ -2,12 +2,29 @@ import React, { useEffect } from "react";
 import styles from "../style";
 import ai from "../assets/ai.png";
 import GetStarted from "../components/GetStarted";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (isAuthenticated) {
+      navigate("/codesnippets");
+    } else {
+      loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: `${window.location.origin}/codesnippets`,
+        },
+      });
+    }
+  };
+
   return (
     <div
       className={`bg-primary w-full min-h-screen overflow-hidden ${styles.flexStart}`}
@@ -26,9 +43,9 @@ const Home = () => {
                 <span>The Next Generation</span>{" "}
               </h1>
               <div className='ss:flex hidden md:mr-4 mr-0'>
-                <Link to='/codesnippets'>
+                <button onClick={handleLogin}>
                   <GetStarted />
-                </Link>
+                </button>
               </div>
             </div>
 
@@ -64,9 +81,9 @@ const Home = () => {
           </div>
 
           <div className={`ss:hidden mb-1 ${styles.flexCenter}`}>
-            <Link to='/codesnippets'>
+            <button onClick={handleLogin}>
               <GetStarted />
-            </Link>
+            </button>
           </div>
         </section>
       </div>

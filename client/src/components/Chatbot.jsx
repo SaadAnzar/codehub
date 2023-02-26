@@ -3,7 +3,9 @@ import axios from "axios";
 
 const Chatbot = () => {
   const [input, setInput] = useState("");
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState(
+    JSON.parse(localStorage.getItem("chats")) || []
+  );
 
   const chatContainerRef = useRef(null);
 
@@ -12,6 +14,8 @@ const Chatbot = () => {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
+    // Store the chats data in local storage
+    localStorage.setItem("chats", JSON.stringify(chats));
   }, [chats]);
 
   const handleSubmit = (event) => {
@@ -20,7 +24,7 @@ const Chatbot = () => {
     setChats([...chats, { message: input, author: "user" }]);
 
     axios
-      .post("https://codehub-8sr2.onrender.com/chat", {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/chat`, {
         prompt: input,
       })
       .then((res) => {

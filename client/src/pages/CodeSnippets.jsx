@@ -9,6 +9,8 @@ import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import Chatbot from "../components/Chatbot";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Navigate } from "react-router-dom";
 
 const CodeSnippets = () => {
   useEffect(() => {
@@ -21,6 +23,16 @@ const CodeSnippets = () => {
     setSelectedSnippet(snippet);
     setShowModal(true);
   };
+
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to='/' />;
+  }
 
   return (
     <div className='bg-primary flex flex-col w-full min-h-screen text-gray-200'>

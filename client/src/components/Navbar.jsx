@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import { navLinks } from "../constants";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const [active, setActive] = useState("Auto Code");
@@ -17,6 +18,8 @@ const Navbar = () => {
     setActive(activeLink ? activeLink.title : "Auto Code");
   }, [location]);
 
+  const { user, isAuthenticated, logout } = useAuth0();
+
   return (
     <nav className='bg-primary w-full flex py-4 justify-between items-center navbar px-8'>
       <Link to='/'>
@@ -29,25 +32,91 @@ const Navbar = () => {
         {navLinks.map((nav) => (
           <li
             key={nav.title}
-            className={`font-poppins font-medium cursor-pointer text-[16px] hover:text-gray-500 ${
+            className={`font-poppins font-medium cursor-pointer text-[16px] mr-10 hover:text-gray-500 ${
               active === nav.title ? "text-white" : "text-dimWhite"
-            } ${
-              nav.title === navLinks[navLinks.length - 1].title
-                ? "mr-0"
-                : "mr-10"
             }`}
             onClick={() => setActive(nav.title)}
           >
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
         ))}
+        {isAuthenticated && (
+          <li className='font-poppins font-medium text-[16px] text-gradient'>
+            {user.given_name}
+          </li>
+        )}
+        <div>
+          <button onClick={() => setToggle(!toggle)}>
+            {toggle ? (
+              <svg
+                className='mx-1 h-4 w-5 transform rotate-180'
+                viewBox='0 0 20 20'
+                fill='currentColor'
+                aria-hidden='true'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='mx-1 h-5 w-5 inline-block'
+                viewBox='0 0 20 20'
+                fill='currentColor'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            )}
+          </button>
+          <div
+            className={`${
+              !toggle ? "hidden" : "flex"
+            } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar z-20`}
+          >
+            <ul className='list-none flex justify-end items-start flex-1 flex-col'>
+              {isAuthenticated && (
+                <li className='font-poppins font-medium mb-4'>
+                  <span className=' text-[15px] text-dimWhite'>
+                    Signed in as
+                  </span>
+                  <br />
+                  <span className='text-[16px] text-gradient'>
+                    {user.email}
+                  </span>
+                </li>
+              )}
+              <hr className='border-b-[0.75px] w-full mb-4 text-white'></hr>
+              <li>
+                <button
+                  className='font-poppins font-medium cursor-pointer text-[16px] hover:text-gray-500'
+                  onClick={() => {
+                    localStorage.removeItem("chats");
+                    logout({
+                      logoutParams: { returnTo: window.location.origin },
+                    });
+                  }}
+                >
+                  Log Out
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </ul>
 
+      {/* Mobile View */}
       <div className='sm:hidden flex flex-1 justify-end items-center'>
         <img
           src={toggle ? close : menu}
           alt='menu'
-          className='w-[28px] h-[28px] object-contain'
+          className='w-[28px] h-[28px] object-contain cursor-pointer'
           onClick={() => setToggle(!toggle)}
         />
 
@@ -57,21 +126,35 @@ const Navbar = () => {
           } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar z-20`}
         >
           <ul className='list-none flex justify-end items-start flex-1 flex-col'>
+            {isAuthenticated && (
+              <li className='font-poppins font-medium mb-4'>
+                <span className=' text-[15px] text-dimWhite'>Signed in as</span>
+                <br />
+                <span className='text-[16px] text-gradient'>{user.email}</span>
+              </li>
+            )}
+            <hr className='border-b-[0.75px] w-full mb-4 text-white'></hr>
             {navLinks.map((nav) => (
               <li
                 key={nav.title}
-                className={`font-poppins font-medium cursor-pointer text-[16px] hover:text-gray-500 ${
+                className={`font-poppins font-medium cursor-pointer text-[16px] mb-4 hover:text-gray-500 ${
                   active === nav.title ? "text-white" : "text-dimWhite"
-                } ${
-                  nav.title === navLinks[navLinks.length - 1].title
-                    ? "mb-0"
-                    : "mb-4"
                 }`}
                 onClick={() => setActive(nav.title)}
               >
                 <Link to={`/${nav.id}`}>{nav.title}</Link>
               </li>
             ))}
+            <li>
+              <button
+                className='font-poppins font-medium cursor-pointer text-[16px] px-4 py-2 rounded hover:text-gray-500 bg-black-gradient-2'
+                onClick={() =>
+                  logout({ logoutParams: { returnTo: window.location.origin } })
+                }
+              >
+                Log Out
+              </button>
+            </li>
           </ul>
         </div>
       </div>

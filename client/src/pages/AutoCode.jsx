@@ -6,6 +6,8 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Navigate } from "react-router-dom";
 
 const inputPrompt = `Write code to setup an express app`;
 
@@ -31,7 +33,7 @@ const AutoCode = () => {
     e.preventDefault();
 
     axios
-      .post("https://codehub-8sr2.onrender.com/auto", {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/auto`, {
         prompt: input,
       })
       .then((res) => {
@@ -43,8 +45,18 @@ const AutoCode = () => {
       });
   };
 
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to='/' />;
+  }
+
   return (
-    <div className='bg-primary flex flex-col w-full min-h-screen'>
+    <div className='bg-primary text-white flex flex-col w-full min-h-screen'>
       <Navbar />
       <div className='mx-6 sm:mx-20 my-4 rounded-lg'>
         {/* <========== Input Form ===========> */}
