@@ -41,7 +41,7 @@ const Navbar = () => {
           </li>
         ))}
         {isAuthenticated && (
-          <li className='font-poppins font-medium text-[16px] text-gradient'>
+          <li className='font-poppins font-bold text-[16px] text-gradient'>
             {user.given_name}
           </li>
         )}
@@ -116,7 +116,7 @@ const Navbar = () => {
         <img
           src={toggle ? close : menu}
           alt='menu'
-          className='w-[28px] h-[28px] object-contain cursor-pointer'
+          className='w-[25px] h-[25px] object-contain cursor-pointer'
           onClick={() => setToggle(!toggle)}
         />
 

@@ -150,6 +150,36 @@
 }
 
 
+/* Loading Page */
+.loading-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00040f;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 4px solid #ccc;
+    border-top-color: #333;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
 /* Code Editor */
 
 .window {
@@ -255,6 +285,8 @@
 
 
 
+
+/* Code Formatter */
 pre[class*='language-'],
 code[class*='language-'] {
     color: #d4d4d4;
