@@ -3,7 +3,7 @@ import "..//index.css";
 
 const Loading = () => {
   return (
-    <div className='loading-page'>
+    <div className='loading-page bg-primary'>
       <div className='spinner'></div>
     </div>
   );

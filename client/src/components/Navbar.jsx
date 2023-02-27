@@ -42,14 +42,18 @@ const Navbar = () => {
         ))}
         {isAuthenticated && (
           <li className='font-poppins font-bold text-[16px] text-gradient'>
-            {user.given_name}
+            <img
+              className='h-6 w-6 object-contain rounded'
+              src={user.picture}
+              alt={user.name}
+            />
           </li>
         )}
         <div>
           <button onClick={() => setToggle(!toggle)}>
             {toggle ? (
               <svg
-                className='mx-1 h-4 w-5 transform rotate-180'
+                className='mx-1 h-5 w-6 transform rotate-180'
                 viewBox='0 0 20 20'
                 fill='currentColor'
                 aria-hidden='true'
@@ -63,7 +67,7 @@ const Navbar = () => {
             ) : (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                className='mx-1 h-5 w-5 inline-block'
+                className='mx-1 h-6 w-6 inline-block'
                 viewBox='0 0 20 20'
                 fill='currentColor'
               >
@@ -81,17 +85,15 @@ const Navbar = () => {
             } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar z-20`}
           >
             <ul className='list-none flex justify-end items-start flex-1 flex-col'>
-              {isAuthenticated && (
-                <li className='font-poppins font-medium mb-4'>
-                  <span className=' text-[15px] text-dimWhite'>
-                    Signed in as
-                  </span>
-                  <br />
+              <li className='font-poppins font-medium mb-4'>
+                <span className=' text-[15px] text-dimWhite'>Signed in as</span>
+                <br />
+                {isAuthenticated && (
                   <span className='text-[16px] text-gradient'>
                     {user.email}
                   </span>
-                </li>
-              )}
+                )}
+              </li>
               <hr className='border-b-[0.75px] w-full mb-4 text-white'></hr>
               <li>
                 <button
@@ -113,10 +115,19 @@ const Navbar = () => {
 
       {/* Mobile View */}
       <div className='sm:hidden flex flex-1 justify-end items-center'>
+        {isAuthenticated && (
+          <div>
+            <img
+              className='h-[25px] w-[25px] object-contain rounded mr-4'
+              src={user.picture}
+              alt={user.name}
+            />
+          </div>
+        )}
         <img
           src={toggle ? close : menu}
           alt='menu'
-          className='w-[25px] h-[25px] object-contain cursor-pointer'
+          className='w-[23px] h-[23px] object-contain cursor-pointer'
           onClick={() => setToggle(!toggle)}
         />
 
@@ -126,13 +137,13 @@ const Navbar = () => {
           } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar z-20`}
         >
           <ul className='list-none flex justify-end items-start flex-1 flex-col'>
-            {isAuthenticated && (
-              <li className='font-poppins font-medium mb-4'>
-                <span className=' text-[15px] text-dimWhite'>Signed in as</span>
-                <br />
+            <li className='font-poppins font-medium mb-4'>
+              <span className=' text-[15px] text-dimWhite'>Signed in as</span>
+              <br />
+              {isAuthenticated && (
                 <span className='text-[16px] text-gradient'>{user.email}</span>
-              </li>
-            )}
+              )}
+            </li>
             <hr className='border-b-[0.75px] w-full mb-4 text-white'></hr>
             {navLinks.map((nav) => (
               <li
@@ -148,9 +159,12 @@ const Navbar = () => {
             <li>
               <button
                 className='font-poppins font-medium cursor-pointer text-[16px] px-4 py-2 rounded hover:text-gray-500 bg-black-gradient-2'
-                onClick={() =>
-                  logout({ logoutParams: { returnTo: window.location.origin } })
-                }
+                onClick={() => {
+                  localStorage.removeItem("chats");
+                  logout({
+                    logoutParams: { returnTo: window.location.origin },
+                  });
+                }}
               >
                 Log Out
               </button>
