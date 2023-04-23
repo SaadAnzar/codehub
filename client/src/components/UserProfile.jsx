@@ -26,6 +26,8 @@ const UserProfile = () => {
   const [activeBtn, setActiveBtn] = useState("created");
   const { userId } = useParams();
 
+  const { isAuthenticated, isLoading } = useAuth0();
+
   useEffect(() => {
     const query = userQuery(userId);
     client.fetch(query).then((data) => {
@@ -49,10 +51,6 @@ const UserProfile = () => {
     }
   }, [text, userId]);
 
-  if (!user) return <Spinner message='Loading profile...' />;
-
-  const { isAuthenticated, isLoading } = useAuth0();
-
   if (isLoading) {
     return <Loading />;
   }
@@ -60,6 +58,8 @@ const UserProfile = () => {
   if (!isAuthenticated) {
     return <Navigate to='/' />;
   }
+
+  if (!user) return <Spinner message='Loading profile...' />;
 
   return (
     <div className='bg-primary text-white flex flex-col w-full min-h-screen'>
