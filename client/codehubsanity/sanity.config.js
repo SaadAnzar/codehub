@@ -8,7 +8,7 @@ export default defineConfig({
   name: 'default',
   title: 'codehub_sanity',
 
-  projectId: 'un3ooh5x',
+  projectId: 'dqto1edk',
   dataset: 'production',
 
   plugins: [deskTool(), visionTool(), codeInput()],
