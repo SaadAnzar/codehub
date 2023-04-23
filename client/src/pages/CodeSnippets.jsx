@@ -49,7 +49,7 @@ const CodeSnippets = () => {
               onClick={() => setToggleSidebar(true)}
             />
             {toggleSidebar && (
-              <div className='fixed w-[90vw] bg-primary overflow-y-auto shadow-md z-10 animate-slide-in'>
+              <div className='relative w-[90vw] bg-primary overflow-y-auto shadow-md z-10 animate-slide-in right-6'>
                 <div className='absolute w-full flex justify-end items-center p-2'>
                   <AiFillCloseCircle
                     fontSize={30}
