@@ -40,6 +40,7 @@ const Home = () => {
 
       client.createIfNotExists(doc).then(() => {
         // console.log("User document created in Sanity", doc);
+        navigate(window.location.pathname, { replace: true });
       });
     }
   }, [isAuthenticated, user]);
