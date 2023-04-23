@@ -4,26 +4,45 @@ import ai from "../assets/ai.png";
 import GetStarted from "../components/GetStarted";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { client } from "../client";
 
 const Home = () => {
+  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (isAuthenticated) {
       navigate("/codesnippets");
     } else {
-      loginWithRedirect({
-        authorizationParams: {
-          redirect_uri: `${window.location.origin}/codesnippets`,
-        },
-      });
+      loginWithRedirect();
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      // Save user to localStorage
+      localStorage.setItem("user", JSON.stringify(user));
+      // console.log("User saved to localStorage", localStorage.getItem("user"));
+      // Create a new user document in Sanity
+      const { name, nickname, sub, picture } = user;
+
+      const doc = {
+        _id: sub.substring(sub.indexOf("|") + 1),
+        _type: "user",
+        userName: name,
+        nickName: nickname,
+        image: picture,
+      };
+
+      client.createIfNotExists(doc).then(() => {
+        // console.log("User document created in Sanity", doc);
+      });
+    }
+  }, [isAuthenticated, user]);
 
   return (
     <div

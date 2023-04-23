@@ -49,7 +49,7 @@ export const socialMedia = [
 
 export const programmingLangs = [
   {
-    id: "cpp",
+    id: "c++",
     title: "C++",
     icon: cpp,
   },
@@ -90,58 +90,58 @@ export const programmingLangs = [
   },
 ];
 
-export const programmingSnippets = [
-  {
-    id: "snippet-1",
-    title: "Hello World",
-    code: `
-#include <iostream>
-using namespace std;
+// export const programmingSnippets = [
+//   {
+//     id: "snippet-1",
+//     title: "Hello World",
+//     code: `
+// #include <iostream>
+// using namespace std;
 
-int main() {
-  cout << "Hello World!";
+// int main() {
+//   cout << "Hello World!";
 
-  return 0;
-}`,
-    lang: "cpp",
-    author: "admin",
-    icon: cpp,
-  },
-  {
-    id: "snippet-2",
-    title: "Initialize a flask app",
-    code: `
-from flask import Flask
+//   return 0;
+// }`,
+//     lang: "cpp",
+//     author: "admin",
+//     icon: cpp,
+//   },
+//   {
+//     id: "snippet-2",
+//     title: "Initialize a flask app",
+//     code: `
+// from flask import Flask
 
-app = Flask(__name__)
-    
-@app.route('/')
-def hello_world():
-  return 'Hello, World!'
-    
-if __name__ == '__main__':
-  app.run()`,
-    lang: "python",
-    author: "admin",
-    icon: python,
-  },
-  {
-    id: "snippet-3",
-    title: "FizzBuzz Program",
-    code: `
-for (var i = 1; i <= 100; i++) {
-  if (i % 15 === 0) {
-    console.log("FizzBuzz");
-  } else if (i % 3 === 0) {
-    console.log("Fizz");
-  } else if (i % 5 === 0) {
-    console.log("Buzz");
-  } else {
-    console.log(i);
-  }
-}`,
-    lang: "javascript",
-    author: "admin",
-    icon: javascript,
-  },
-];
+// app = Flask(__name__)
+
+// @app.route('/')
+// def hello_world():
+//   return 'Hello, World!'
+
+// if __name__ == '__main__':
+//   app.run()`,
+//     lang: "python",
+//     author: "admin",
+//     icon: python,
+//   },
+//   {
+//     id: "snippet-3",
+//     title: "FizzBuzz Program",
+//     code: `
+// for (var i = 1; i <= 100; i++) {
+//   if (i % 15 === 0) {
+//     console.log("FizzBuzz");
+//   } else if (i % 3 === 0) {
+//     console.log("Fizz");
+//   } else if (i % 5 === 0) {
+//     console.log("Buzz");
+//   } else {
+//     console.log(i);
+//   }
+// }`,
+//     lang: "javascript",
+//     author: "admin",
+//     icon: javascript,
+//   },
+// ];

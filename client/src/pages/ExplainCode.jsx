@@ -33,6 +33,7 @@ const ExplainCode = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const [code, setCode] = useState(codeSnippet);
   const [output, setOutput] = useState(explainedCode);
 

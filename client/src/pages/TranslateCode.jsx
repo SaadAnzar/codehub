@@ -46,6 +46,7 @@ const TranslateCode = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const [code, setCode] = useState(codeSnippet);
   const [output, setOutput] = useState(translatedCode);
   const [firstl, setFirstl] = useState("C++");
@@ -94,7 +95,7 @@ const TranslateCode = () => {
                     value={firstl}
                     placeholder='Translate from...'
                     onChange={(event) => setFirstl(event.target.value)}
-                    className='bg-inherit border-none outline-none text-white w-full capitalize'
+                    className='bg-inherit border-none outline-none text-white w-full capitalize px-4'
                   />
                 </div>
               </div>
@@ -145,7 +146,7 @@ const TranslateCode = () => {
                     value={secondl}
                     placeholder='Translate to...'
                     onChange={(event) => setSecondl(event.target.value)}
-                    className='bg-inherit border-none outline-none text-white w-full capitalize'
+                    className='bg-inherit border-none outline-none text-white w-full capitalize px-4'
                   />
                 </div>
               </div>
