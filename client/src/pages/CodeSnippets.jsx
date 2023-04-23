@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-// import { programmingLangs } from "../constants";
-import { programmingSnippets } from "../constants";
-import avatar from "../assets/avatar.svg";
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
 import Chatbot from "../components/Chatbot";
+import Languages from "../components/Languages";
+import Loading from "../components/Loading";
+import Feed from "../components/Feed";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router-dom";
-import Loading from "../components/Loading";
+import { HiMenu } from "react-icons/hi";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const CodeSnippets = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedSnippet, setSelectedSnippet] = useState(null);
 
-  const handleClick = (snippet) => {
-    setSelectedSnippet(snippet);
-    setShowModal(true);
-  };
+  const [toggleSidebar, setToggleSidebar] = useState(false);
 
   const { isAuthenticated, isLoading } = useAuth0();
 
@@ -39,113 +31,41 @@ const CodeSnippets = () => {
     <div className='bg-primary flex flex-col w-full min-h-screen text-gray-200'>
       <Navbar />
       <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>
-        {/* ====== Languages ====== */}
-        {/* <div className='sm:w-[15%]'>
-          <div className='font-poppins font-medium text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-xl'>
-            Languages
-          </div>
-          <div className=' sm:h-[70vh] h-auto overflow-auto'>
-            <ul className='list-none'>
-              {programmingLangs.map((langs) => (
-                <li
-                  key={langs.title}
-                  className='font-poppins font-medium text-base'
-                >
-                  <div className='inline-flex m-4'>
-                    <img
-                      src={`${langs.icon}`}
-                      alt={`${langs.id}`}
-                      className='w-[28px] h-[28px] object-contain mr-4'
-                    />
-                    {langs.title}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div> */}
-        {/* ====== End Languages ====== */}
-
-        {/* ====== Chatbot ====== */}
-        <div className='sm:w-[40%] sm:order-2 sm:mr-16 sm:mb-0 mb-6'>
-          <div className='font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-lg'>
-            CodeHub Chatbot
-          </div>
+        <div className='sm:w-[35%] sm:order-2 sm:mb-0 mb-6'>
           <Chatbot />
         </div>
-        {/* ====== End Chatbot ====== */}
 
-        {/* ====== Code Snippets ====== */}
-        <div className='sm:w-[40%] sm:order-1 sm:ml-16'>
-          <div className='font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-lg'>
-            Code Snippets
-          </div>
-          <div className='overflow-auto'>
-            <div className='sm:h-[70vh] h-auto overflow-auto'>
-              <ul>
-                {programmingSnippets.map((snippets) => (
-                  <li key={snippets.id} onClick={() => handleClick(snippets)}>
-                    <div className='bg-gray-gradient p-3 rounded-lg mb-3 cursor-pointer'>
-                      <div className='inline-flex font-[300] text-gray-400 font-poppins'>
-                        <img
-                          src={avatar}
-                          alt='avatar'
-                          className='w-[28px] h-[28px] object-contain mr-2'
-                        />
-                        @{snippets.author}
-                      </div>
-                      <div className='py-4 font-normal'>{snippets.title}</div>
-                      <hr></hr>
-                      <div className='inline-flex justify-between pt-3'>
-                        <img
-                          src={snippets.icon}
-                          alt={snippets.id}
-                          className='w-[28px] h-[28px] object-contain mr-8'
-                        />
-                        <div className='bg-slate-600 px-4 rounded-md float-right'>
-                          {snippets.lang}
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+        <div className='sm:w-[20%]'>
+          <div className='hidden sm:block'>
+            <div className='font-poppins font-medium text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-xl'>
+              Languages
             </div>
+            <Languages />
+          </div>
+          <div className='flex sm:hidden pb-3'>
+            <HiMenu
+              fontSize={30}
+              className='cursor-pointer'
+              onClick={() => setToggleSidebar(true)}
+            />
+            {toggleSidebar && (
+              <div className='fixed w-[90vw] bg-primary overflow-y-auto shadow-md z-10 animate-slide-in'>
+                <div className='absolute w-full flex justify-end items-center p-2'>
+                  <AiFillCloseCircle
+                    fontSize={30}
+                    className='cursor-pointer'
+                    onClick={() => setToggleSidebar(false)}
+                  />
+                </div>
+                <div className='font-poppins font-medium text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-xl'>
+                  Languages
+                </div>
+                <Languages closeToggle={setToggleSidebar} />
+              </div>
+            )}
           </div>
         </div>
-        {/* ====== End Code Snippets ====== */}
-
-        {/* ====== Modal ====== */}
-        {showModal && (
-          <div className='fixed top-[10vh] w-full justify-center'>
-            <div className='rounded-lg overflow-hidden bg-[#1a1e22] sm:w-[45%] w-[90%] sm:h-[80vh] h-[70vh] text-center'>
-              <div className='title-bar'>
-                <div className='p-2'>
-                  {selectedSnippet && selectedSnippet.title}
-                  <button
-                    className='text-white bg-gray-900 rounded-sm hover:bg-gray-400 px-2 float-right'
-                    onClick={() => setShowModal(false)}
-                  >
-                    X
-                  </button>
-                </div>
-              </div>
-              <div className='editor_wrap'>
-                <Editor
-                  value={selectedSnippet && selectedSnippet.code}
-                  onValueChange={(code) => setCode(code)}
-                  highlight={(code) => highlight(code, languages.js)}
-                  padding={10}
-                  style={{
-                    fontFamily: '"Fira code", "Fira Mono", monospace',
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-        {/* ====== End Modal ====== */}
+        <Feed />
       </div>
       <Footer />
     </div>

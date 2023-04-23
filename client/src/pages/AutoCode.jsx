@@ -27,6 +27,7 @@ const AutoCode = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const [input, setInput] = useState(inputPrompt);
   const [output, setOutput] = useState(outputCode);
 

@@ -46,6 +46,7 @@ const TranslateCode = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const [code, setCode] = useState(codeSnippet);
   const [output, setOutput] = useState(translatedCode);
   const [firstl, setFirstl] = useState("C++");

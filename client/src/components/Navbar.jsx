@@ -6,7 +6,7 @@ import { navLinks } from "../constants";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-  const [active, setActive] = useState("Auto Code");
+  const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
 
   const location = useLocation();
@@ -15,7 +15,7 @@ const Navbar = () => {
     const activeLink = navLinks.find(
       (nav) => nav.id === location.pathname.substring(1)
     );
-    setActive(activeLink ? activeLink.title : "Auto Code");
+    setActive(activeLink ? activeLink.title : "");
   }, [location]);
 
   const { user, isAuthenticated, logout } = useAuth0();
@@ -99,7 +99,7 @@ const Navbar = () => {
                 <button
                   className='font-poppins font-medium cursor-pointer text-[16px] hover:text-gray-500'
                   onClick={() => {
-                    localStorage.removeItem("chats");
+                    localStorage.removeItem("chats", "user", "userInfo");
                     logout({
                       logoutParams: { returnTo: window.location.origin },
                     });
