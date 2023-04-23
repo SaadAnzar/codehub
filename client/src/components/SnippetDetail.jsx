@@ -113,7 +113,7 @@ const SnippetDetail = () => {
             <div className='sm:w-[40vw]'>
               <Link
                 to={`/user-profile/${snippetDetail?.postedBy._id}`}
-                className='flex gap-4 my-5 items-center rounded-lg '
+                className='flex gap-4 my-5 items-center rounded-lg'
               >
                 <img
                   src={snippetDetail?.postedBy.image || avatar}

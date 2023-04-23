@@ -143,22 +143,22 @@
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 3px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #33bbcf;
+  background: #2b323a;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #def9fa;
+  background: gray;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #7de7eb;
+  background: rgb(165, 162, 162);
 }
 
 /* Loading Page */

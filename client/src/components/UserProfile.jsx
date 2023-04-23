@@ -6,6 +6,7 @@ import {
   userSavedSnippetsQuery,
 } from "../utils/data";
 import { client } from "../client";
+import avatar from "../assets/avatar.svg";
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "./Navbar";
 import Spinner from "./Spinner";
@@ -14,9 +15,9 @@ import Snippets from "./Snippets";
 import Footer from "./Footer";
 
 const activeBtnStyles =
-  "bg-blue-gradient mx-2 text-black font-bold p-2 rounded-full w-20 outline-none";
+  "bg-blue-gradient mx-2 text-black font-bold p-1 rounded-full w-20 outline-none";
 const notActiveBtnStyles =
-  "bg-white mx-2 text-gray-600 font-bold p-2 rounded-full w-20 outline-none";
+  "bg-white mx-2 text-gray-600 font-bold p-1 rounded-full w-20 outline-none";
 
 const UserProfile = () => {
   const [user, setUser] = useState();
@@ -63,44 +64,50 @@ const UserProfile = () => {
   return (
     <div className='bg-primary text-white flex flex-col w-full min-h-screen'>
       <Navbar />
-      <div className='mx-6 sm:mx-20 my-4'>
-        <div className='relative pb-2 h-full justify-center items-center'>
-          <div className='text-center mb-7'>
-            <button
-              type='button'
-              onClick={(e) => {
-                setText(e.target.textContent);
-                setActiveBtn("created");
-              }}
-              className={`${
-                activeBtn === "created" ? activeBtnStyles : notActiveBtnStyles
-              }`}
-            >
-              Created
-            </button>
-            <button
-              type='button'
-              onClick={(e) => {
-                setText(e.target.textContent);
-                setActiveBtn("saved");
-              }}
-              className={`${
-                activeBtn === "saved" ? activeBtnStyles : notActiveBtnStyles
-              }`}
-            >
-              Saved
-            </button>
-          </div>
-          {snippets?.length ? (
-            <div className='sm:mx-72'>
-              <Snippets snippets={snippets} />
-            </div>
-          ) : (
-            <div className='flex justify-center font-bold text-dimWhite items-center text-2xl mt-4'>
-              No Snippets Found!
-            </div>
-          )}
+      <div className='mx-6 sm:mx-20 mt-2'>
+        <div className='flex gap-4 justify-center items-center rounded-lg'>
+          <img
+            src={user?.image || avatar}
+            className='w-8 h-8 rounded-full'
+            alt={user?.userName}
+          />
+          <p className='font-bold'>{user?.userName}</p>
         </div>
+        <div className='text-center my-4'>
+          <button
+            type='button'
+            onClick={(e) => {
+              setText(e.target.textContent);
+              setActiveBtn("created");
+            }}
+            className={`${
+              activeBtn === "created" ? activeBtnStyles : notActiveBtnStyles
+            }`}
+          >
+            Created
+          </button>
+          <button
+            type='button'
+            onClick={(e) => {
+              setText(e.target.textContent);
+              setActiveBtn("saved");
+            }}
+            className={`${
+              activeBtn === "saved" ? activeBtnStyles : notActiveBtnStyles
+            }`}
+          >
+            Saved
+          </button>
+        </div>
+        {snippets?.length ? (
+          <div className='sm:mx-72'>
+            <Snippets snippets={snippets} />
+          </div>
+        ) : (
+          <div className='flex justify-center font-bold text-dimWhite items-center text-2xl mt-4'>
+            No Snippets Found!
+          </div>
+        )}
       </div>
       <Footer />
     </div>
