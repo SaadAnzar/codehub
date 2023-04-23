@@ -96,8 +96,8 @@ export const userQuery = (userId) => {
   return query;
 };
 
-export const userCreatedPinsQuery = (userId) => {
-  const query = `*[ _type == 'pin' && userId == '${userId}'] | order(_createdAt desc){
+export const userCreatedSnippetsQuery = (userId) => {
+  const query = `*[ _type == 'snippet' && userId == '${userId}'] | order(_createdAt desc){
     _id,
     title,
     code[]{
@@ -120,13 +120,13 @@ export const userCreatedPinsQuery = (userId) => {
         nickName,
         image
       },
-    },,
+    },
   }`;
   return query;
 };
 
-export const userSavedPinsQuery = (userId) => {
-  const query = `*[_type == 'pin' && '${userId}' in save[].userId ] | order(_createdAt desc) {
+export const userSavedSnippetsQuery = (userId) => {
+  const query = `*[_type == 'snippet' && '${userId}' in save[].userId ] | order(_createdAt desc) {
     _id,
     title,
     code[]{

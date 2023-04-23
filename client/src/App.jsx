@@ -7,6 +7,7 @@ import TranslateCode from "./pages/TranslateCode";
 import NotFoundPage from "./pages/NotFoundPage";
 import CreateSnippet from "./components/CreateSnippet";
 import SnippetDetail from "./components/SnippetDetail";
+import UserProfile from "./components/UserProfile";
 
 const App = () => (
   <BrowserRouter>
@@ -22,6 +23,7 @@ const App = () => (
         path='/codesnippets/snippet-detail/:snippetId'
         element={<SnippetDetail />}
       />
+      <Route path='/user-profile/:userId' element={<UserProfile />} />
       <Route path='/autocode' element={<AutoCode />} />
       <Route path='/explaincode' element={<ExplainCode />} />
       <Route path='/translatecode' element={<TranslateCode />} />

@@ -4,6 +4,7 @@ import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import { navLinks } from "../constants";
 import { useAuth0 } from "@auth0/auth0-react";
+import { AiOutlineLogout } from "react-icons/ai";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -85,27 +86,35 @@ const Navbar = () => {
             } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar z-20`}
           >
             <ul className='list-none flex justify-end items-start flex-1 flex-col'>
-              <li className='font-poppins font-medium mb-4'>
-                <span className=' text-[15px] text-dimWhite'>Signed in as</span>
-                <br />
-                {isAuthenticated && (
-                  <span className='text-[16px] text-gradient'>
-                    {user.email}
+              <Link
+                to={`/user-profile/${user?.sub.substring(
+                  user?.sub.indexOf("|") + 1
+                )}`}
+              >
+                <li className='font-poppins font-medium mb-4'>
+                  <span className='text-[15px] text-dimWhite'>
+                    Signed in as
                   </span>
-                )}
-              </li>
+                  <br />
+                  {isAuthenticated && (
+                    <span className='text-[16px] text-gradient'>
+                      {user.email}
+                    </span>
+                  )}
+                </li>
+              </Link>
               <hr className='border-b-[0.75px] w-full mb-4 text-white'></hr>
               <li>
                 <button
                   className='font-poppins font-medium cursor-pointer text-[16px] hover:text-gray-500'
                   onClick={() => {
-                    localStorage.removeItem("chats", "user", "userInfo");
+                    localStorage.clear();
                     logout({
                       logoutParams: { returnTo: window.location.origin },
                     });
                   }}
                 >
-                  Log Out
+                  Log Out <AiOutlineLogout className='inline-block mb-1' />
                 </button>
               </li>
             </ul>
@@ -137,13 +146,21 @@ const Navbar = () => {
           } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar z-20`}
         >
           <ul className='list-none flex justify-end items-start flex-1 flex-col'>
-            <li className='font-poppins font-medium mb-4'>
-              <span className=' text-[15px] text-dimWhite'>Signed in as</span>
-              <br />
-              {isAuthenticated && (
-                <span className='text-[16px] text-gradient'>{user.email}</span>
-              )}
-            </li>
+            <Link
+              to={`/user-profile/${user?.sub.substring(
+                user?.sub.indexOf("|") + 1
+              )}`}
+            >
+              <li className='font-poppins font-medium mb-4'>
+                <span className='text-[15px] text-dimWhite'>Signed in as</span>
+                <br />
+                {isAuthenticated && (
+                  <span className='text-[16px] text-gradient'>
+                    {user.email}
+                  </span>
+                )}
+              </li>
+            </Link>
             <hr className='border-b-[0.75px] w-full mb-4 text-white'></hr>
             {navLinks.map((nav) => (
               <li
@@ -160,13 +177,13 @@ const Navbar = () => {
               <button
                 className='font-poppins font-medium cursor-pointer text-[16px] px-4 py-2 rounded hover:text-gray-500 bg-black-gradient-2'
                 onClick={() => {
-                  localStorage.removeItem("chats");
+                  localStorage.clear();
                   logout({
                     logoutParams: { returnTo: window.location.origin },
                   });
                 }}
               >
-                Log Out
+                Log Out <AiOutlineLogout className='inline-block mb-1' />
               </button>
             </li>
           </ul>

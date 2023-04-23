@@ -49,7 +49,7 @@ export const socialMedia = [
 
 export const programmingLangs = [
   {
-    id: "cpp",
+    id: "c++",
     title: "C++",
     icon: cpp,
   },

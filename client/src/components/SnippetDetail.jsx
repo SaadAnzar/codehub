@@ -126,7 +126,7 @@ const SnippetDetail = () => {
               <div className='max-h-[40vh] overflow-y-auto bg-gray-gradient rounded-lg'>
                 {!snippetDetail?.comments?.length && (
                   <div className='text-center px-4'>
-                    No comments yet. Be the first to comment
+                    No comments yet. Be the first to comment.
                   </div>
                 )}
                 {snippetDetail?.comments?.map((item) => (
@@ -144,17 +144,11 @@ const SnippetDetail = () => {
                 ))}
               </div>
               <div className='flex mt-6 gap-4 mr-2'>
-                <Link
-                  to={`/user-profile/${userInfo?.sub.substring(
-                    userInfo?.sub.indexOf("|") + 1
-                  )}`}
-                >
-                  <img
-                    src={userInfo?.picture || avatar}
-                    className='w-10 h-10 rounded-full cursor-pointer'
-                    alt={userInfo?.name}
-                  />
-                </Link>
+                <img
+                  src={userInfo?.picture || avatar}
+                  className='w-10 h-10 rounded-full'
+                  alt={userInfo?.name}
+                />
                 <input
                   className='flex-1 bg-gray-gradient border-gray-300 border-2 p-2 rounded-2xl focus:border-gray-100'
                   type='text'

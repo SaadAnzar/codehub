@@ -94,7 +94,12 @@ const CreateSnippet = () => {
                 <input
                   type='text'
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  // onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) =>
+                    setTitle(
+                      e.target.value.replace(/\b\w/g, (l) => l.toUpperCase())
+                    )
+                  }
                   placeholder='Add your title'
                   className='bg-[#1a1e22] border-none outline-none w-full p-3 rounded-lg capitalize'
                 />
