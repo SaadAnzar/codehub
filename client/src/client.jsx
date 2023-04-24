@@ -1,9 +1,10 @@
 import { createClient } from "@sanity/client";
 
 export const client = createClient({
-  projectId: "dqto1edk",
-  dataset: "production",
+  projectId: import.meta.env.VITE_APP_CODEHUB_SANITY_PROJECT_ID,
+  dataset: import.meta.env.VITE_APP_CODEHUB_SANITY_DATASET,
   apiVersion: "2021-10-21",
   useCdn: true,
   token: import.meta.env.VITE_APP_CODEHUB_SANITY_TOKEN,
+  ignoreBrowserTokenWarning: true,
 });

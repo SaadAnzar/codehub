@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CodeSnippets from "./pages/CodeSnippets";
 import AutoCode from "./pages/AutoCode";
@@ -9,8 +10,8 @@ import CreateSnippet from "./components/CreateSnippet";
 import SnippetDetail from "./components/SnippetDetail";
 import UserProfile from "./components/UserProfile";
 
-const App = () => (
-  <BrowserRouter>
+const App = () => {
+  return (
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/codesnippets' element={<CodeSnippets />} />
@@ -29,7 +30,7 @@ const App = () => (
       <Route path='/translatecode' element={<TranslateCode />} />
       <Route path='*' element={<NotFoundPage />} />
     </Routes>
-  </BrowserRouter>
-);
+  );
+};
 
 export default App;
