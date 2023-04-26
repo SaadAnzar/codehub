@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Chatbot from "../components/Chatbot";
 import Languages from "../components/Languages";
 import Loading from "../components/Loading";
@@ -67,7 +66,6 @@ const CodeSnippets = () => {
         </div>
         <Feed />
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
@@ -133,7 +132,6 @@ const ExplainCode = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -9,7 +9,6 @@ import "prismjs/components/prism-javascript";
 import { fetchUser } from "../utils/fetchUser";
 import { snippetDetailQuery } from "../utils/data";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 import Loading from "./Loading";
 import Spinner from "./Spinner";
 import { v4 as uuidv4 } from "uuid";
@@ -166,7 +165,6 @@ const SnippetDetail = () => {
               </div>
             </div>
           </div>
-          <Footer />
         </div>
       )}
     </>

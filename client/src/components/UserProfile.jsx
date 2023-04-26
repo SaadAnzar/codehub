@@ -12,7 +12,6 @@ import Navbar from "./Navbar";
 import Spinner from "./Spinner";
 import Loading from "./Loading";
 import Snippets from "./Snippets";
-import Footer from "./Footer";
 
 const activeBtnStyles =
   "bg-blue-gradient mx-2 text-black font-bold p-1 rounded-full w-20 outline-none";
@@ -109,7 +108,6 @@ const UserProfile = () => {
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 };

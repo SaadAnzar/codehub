@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import axios from "axios";
 import Editor from "react-simple-code-editor";
@@ -122,7 +121,6 @@ const AutoCode = () => {
         </div>
         {/* <=========== CodeViewer ===========> */}
       </div>
-      <Footer />
     </div>
   );
 };

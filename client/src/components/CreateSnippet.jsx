@@ -11,7 +11,6 @@ import { fetchUser } from "../utils/fetchUser";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./Loading";
-import Footer from "./Footer";
 
 const codeSnippet = `function add(a, b) {
   return a + b;
@@ -158,7 +157,6 @@ const CreateSnippet = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
