@@ -9,15 +9,20 @@ export default {
       type: 'string',
     },
     {
+      name: 'language',
+      title: 'Language',
+      type: 'string',
+    },
+    {
+      name: 'about',
+      title: 'About',
+      type: 'string',
+    },
+    {
       name: 'code',
       title: 'Code',
       type: 'array',
       of: [{type: 'code'}],
-    },
-    {
-      name: 'language',
-      title: 'Language',
-      type: 'string',
     },
     {
       name: 'userId',

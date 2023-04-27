@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import Loading from "../components/Loading";
+import Spinner from "../components/Spinner";
 import axios from "axios";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const inputPrompt = `Write code to setup an express app`;
 
@@ -27,6 +27,8 @@ const AutoCode = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate = useNavigate();
+
   const [input, setInput] = useState(inputPrompt);
   const [output, setOutput] = useState(outputCode);
 
@@ -39,7 +41,6 @@ const AutoCode = () => {
       })
       .then((res) => {
         setOutput(res.data.output);
-        // console.log(res.data.output);
       })
       .catch((err) => {
         console.log(err);
@@ -49,12 +50,10 @@ const AutoCode = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <Loading />;
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to='/' />;
-  }
+  if (!isAuthenticated) navigate("/");
 
   return (
     <div className='bg-primary text-white flex flex-col w-full min-h-screen'>

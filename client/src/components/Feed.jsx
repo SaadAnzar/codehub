@@ -29,7 +29,7 @@ const Feed = () => {
     }
   }, [languageId]);
 
-  const ideaName = languageId || "new";
+  const ideaName = languageId || "Code";
 
   if (loading) {
     return (
@@ -42,9 +42,6 @@ const Feed = () => {
         <Link to='/codesnippets'>
           <div className='font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient hover:bg-gray-600 p-2 px-3 sm:px-6 rounded-lg'>
             Code Snippets
-            <span className='bg-discount-gradient px-3 ml-4 py-1 rounded-md'>
-              {snippets?.length}
-            </span>
           </div>
         </Link>
         <Link to='/codesnippets/create-snippet'>
@@ -58,6 +55,9 @@ const Feed = () => {
           </div>
         </Link>
       </div>
+      <span className='text-gray-400 text-sm p-4'>
+        {snippets?.length} {ideaName} Snippets available
+      </span>
       {snippets && <Snippets snippets={snippets} />}
     </div>
   );

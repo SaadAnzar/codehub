@@ -17,6 +17,11 @@ const GetStarted = () => {
             <p className='font-poppins font-medium text-[18px] leading-[23.4px]'>
               <span className='text-gradient'>Let's</span>
             </p>
+            <img
+              src={arrowUp}
+              alt='arrow-up'
+              className='w-[23px] h-[23px] object-contain'
+            />
           </div>
 
           <p className='font-poppins font-medium text-[18px] leading-[23.4px]'>

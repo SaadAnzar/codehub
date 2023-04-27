@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import avatar from "../assets/avatar.svg";
 import { client } from "../client";
 import Editor from "react-simple-code-editor";
@@ -9,12 +9,12 @@ import "prismjs/components/prism-javascript";
 import { fetchUser } from "../utils/fetchUser";
 import { snippetDetailQuery } from "../utils/data";
 import Navbar from "./Navbar";
-import Loading from "./Loading";
 import Spinner from "./Spinner";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const SnippetDetail = () => {
+  const navigate = useNavigate();
   const { snippetId } = useParams();
   const [snippetDetail, setSnippetDetail] = useState();
   const [comment, setComment] = useState("");
@@ -65,12 +65,10 @@ const SnippetDetail = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <Loading />;
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to='/' />;
-  }
+  if (!isAuthenticated) navigate("/");
 
   if (!snippetDetail) {
     return <Spinner message='Showing Code Snippet' />;
@@ -81,7 +79,7 @@ const SnippetDetail = () => {
       {snippetDetail && (
         <div className='bg-primary text-white flex flex-col w-full min-h-screen'>
           <Navbar />
-          <div className='sm:flex justify-between sm:mx-16 mx-4 my-4 p-2 bg-gray-gradient rounded-lg'>
+          <div className='sm:flex justify-between sm:mx-16 mx-4 my-4 p-2 sm:p-4 bg-gray-gradient rounded-lg'>
             <div className='sm:w-[40vw]'>
               <div className='App'>
                 <div className='window sm:h-[70vh]'>
@@ -110,9 +108,15 @@ const SnippetDetail = () => {
               </div>
             </div>
             <div className='sm:w-[40vw]'>
+              <div className=''>
+                <p className='text-2xl font-poppins font-medium pt-2'>
+                  {snippetDetail?.title}
+                </p>
+                <p className='font-poppins p-2'>{snippetDetail?.about}</p>
+              </div>
               <Link
                 to={`/user-profile/${snippetDetail?.postedBy._id}`}
-                className='flex gap-4 my-5 items-center rounded-lg'
+                className='flex gap-4 my-3 items-center rounded-lg'
               >
                 <img
                   src={snippetDetail?.postedBy.image || avatar}
@@ -121,6 +125,7 @@ const SnippetDetail = () => {
                 />
                 <p className='font-bold'>{snippetDetail?.postedBy.userName}</p>
               </Link>
+
               <div className='text-xl text-center pb-3 underline'>Comments</div>
               <div className='max-h-[40vh] overflow-y-auto bg-gray-gradient rounded-lg'>
                 {!snippetDetail?.comments?.length && (
@@ -142,18 +147,22 @@ const SnippetDetail = () => {
                   </div>
                 ))}
               </div>
-              <div className='flex mt-6 gap-4 mr-2'>
+              <div className='flex mt-4 gap-4 mr-2'>
                 <img
                   src={userInfo?.picture || avatar}
                   className='w-10 h-10 rounded-full'
                   alt={userInfo?.name}
                 />
                 <input
-                  className='flex-1 bg-gray-gradient border-gray-300 border-2 p-2 rounded-2xl focus:border-gray-100'
+                  className='flex-1 bg-gray-gradient border-gray-300 border-2 p-2 my-2 rounded-2xl focus:border-gray-100'
                   type='text'
                   placeholder='Add a comment'
                   value={comment}
-                  onChange={(e) => setComment(e.target.value)}
+                  onChange={(e) =>
+                    setComment(
+                      e.target.value.replace(/\b\w/g, (l) => l.toUpperCase())
+                    )
+                  }
                 />
                 <button
                   type='button'

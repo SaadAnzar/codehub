@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   userQuery,
   userCreatedSnippetsQuery,
@@ -10,7 +10,6 @@ import avatar from "../assets/avatar.svg";
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "./Navbar";
 import Spinner from "./Spinner";
-import Loading from "./Loading";
 import Snippets from "./Snippets";
 
 const activeBtnStyles =
@@ -24,6 +23,8 @@ const UserProfile = () => {
   const [text, setText] = useState("Created");
   const [activeBtn, setActiveBtn] = useState("created");
   const { userId } = useParams();
+
+  const navigate = useNavigate();
 
   const { isAuthenticated, isLoading } = useAuth0();
 
@@ -51,12 +52,10 @@ const UserProfile = () => {
   }, [text, userId]);
 
   if (isLoading) {
-    return <Loading />;
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to='/' />;
-  }
+  if (!isAuthenticated) navigate("/");
 
   if (!user) return <Spinner message='Loading profile...' />;
 

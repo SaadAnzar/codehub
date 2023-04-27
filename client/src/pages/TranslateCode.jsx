@@ -5,9 +5,9 @@ import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import axios from "axios";
 import Navbar from "../components/Navbar";
-import Loading from "../components/Loading";
+import Spinner from "../components/Spinner";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const codeSnippet = `#include <iostream>
 using namespace std;
@@ -46,6 +46,8 @@ const TranslateCode = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate = useNavigate();
+
   const [code, setCode] = useState(codeSnippet);
   const [output, setOutput] = useState(translatedCode);
   const [firstl, setFirstl] = useState("C++");
@@ -72,12 +74,10 @@ const TranslateCode = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <Loading />;
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to='/' />;
-  }
+  if (!isAuthenticated) navigate("/");
 
   return (
     <div className='bg-primary text-white flex flex-col w-full min-h-screen'>

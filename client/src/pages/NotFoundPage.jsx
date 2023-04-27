@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Loading from "../components/Loading";
+import Spinner from "../components/Spinner";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NotFoundPage = () => {
+  const navigate = useNavigate();
+
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <Loading />;
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to='/' />;
-  }
+  if (!isAuthenticated) navigate("/");
 
   return (
     <div className='bg-primary flex flex-col items-center justify-center h-screen'>
@@ -24,7 +24,8 @@ const NotFoundPage = () => {
       </p>
       <Link
         to='/'
-        className='px-8 py-4 bg-gray-800 text-white rounded hover:bg-gray-900 transition-colors duration-300'
+        className='m-2 text-slate-300 bg-black-gradient border rounded-md px-6 py-3 font-medium text-base
+        hover:text-slate-500 focus:outline-none'
       >
         Return to Home
       </Link>

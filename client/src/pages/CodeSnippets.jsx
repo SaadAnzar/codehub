@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Chatbot from "../components/Chatbot";
 import Languages from "../components/Languages";
-import Loading from "../components/Loading";
 import Feed from "../components/Feed";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const CodeSnippets = () => {
+  const { isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
-  const { isAuthenticated, isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to='/' />;
+  {
+    !isAuthenticated && navigate("/");
   }
 
   return (
@@ -39,6 +35,7 @@ const CodeSnippets = () => {
             <div className='font-poppins font-medium text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-xl'>
               Languages
             </div>
+            <span className='text-gray-400 text-sm p-4'>Browse Languages</span>
             <Languages />
           </div>
           <div className='flex sm:hidden pb-3'>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { client } from "../client";
-import { programmingLangs } from "../constants";
+import { programmingLangs } from "../utils/data";
 import Navbar from "./Navbar";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
@@ -10,7 +10,7 @@ import "prismjs/components/prism-javascript";
 import { fetchUser } from "../utils/fetchUser";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
-import Loading from "./Loading";
+import Spinner from "./Spinner";
 
 const codeSnippet = `function add(a, b) {
   return a + b;
@@ -24,18 +24,20 @@ const CreateSnippet = () => {
   const [code, setCode] = useState(codeSnippet);
   const [title, setTitle] = useState("");
   const [language, setLanguage] = useState("");
+  const [about, setAbout] = useState("");
   const [fields, setFields] = useState(false);
 
   const navigate = useNavigate();
 
   const userInfo = fetchUser();
 
-  const saveSnippet = () => {
-    if (title && language && code) {
+  const addSnippet = () => {
+    if (title && language && code && about) {
       const doc = {
         _type: "snippet",
         title,
         language,
+        about,
         code: [
           {
             _type: "code",
@@ -64,12 +66,10 @@ const CreateSnippet = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <Loading />;
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to='/' />;
-  }
+  if (!isAuthenticated) navigate("/");
 
   return (
     <div className='bg-primary text-white flex flex-col w-full min-h-screen'>
@@ -93,7 +93,6 @@ const CreateSnippet = () => {
                 <input
                   type='text'
                   value={title}
-                  // onChange={(e) => setTitle(e.target.value)}
                   onChange={(e) =>
                     setTitle(
                       e.target.value.replace(/\b\w/g, (l) => l.toUpperCase())
@@ -111,15 +110,32 @@ const CreateSnippet = () => {
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className='bg-[#1a1e22] border-none p-3 rounded-lg outline-none'
+                  className='bg-[#1a1e22] text-white border-none p-3 rounded-lg outline-none'
                 >
-                  <option value='other'>-Select Language-</option>
-                  {programmingLangs.map((langs) => (
-                    <option key={langs.id} value={langs.title}>
-                      {langs.title}
+                  <option value='Others'>-Select Language-</option>
+                  {programmingLangs.map((language) => (
+                    <option key={language.name} value={language.name}>
+                      {language.name}
                     </option>
                   ))}
                 </select>
+              </div>
+              <div className='flex flex-col py-2'>
+                <label htmlFor='about' className='text-2xl font-bold m-2'>
+                  About
+                </label>
+                <textarea
+                  type='text'
+                  value={about}
+                  onChange={(e) =>
+                    setAbout(
+                      e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1)
+                    )
+                  }
+                  placeholder='Write something about your code snippet'
+                  className='bg-[#1a1e22] border-none outline-none w-full p-3 rounded-lg capitalize'
+                />
               </div>
             </div>
             <div className='sm:w-[40vw]'>
@@ -135,7 +151,7 @@ const CreateSnippet = () => {
                       value={code}
                       onValueChange={(code) => setCode(code)}
                       highlight={(code) => highlight(code, languages.js)}
-                      padding={10}
+                      padding={15}
                       style={{
                         fontFamily: '"Fira code", "Fira Mono", monospace',
                         fontSize: 12,
@@ -149,7 +165,7 @@ const CreateSnippet = () => {
           <div className='flex justify-center'>
             <button
               type='button'
-              onClick={saveSnippet}
+              onClick={addSnippet}
               className='m-2 text-slate-300 bg-black-gradient border rounded-md px-4 py-2 font-medium text-base hover:text-slate-500 focus:outline-none'
             >
               Create Snippet

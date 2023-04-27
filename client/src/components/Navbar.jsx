@@ -2,9 +2,27 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
-import { navLinks } from "../constants";
 import { useAuth0 } from "@auth0/auth0-react";
 import { AiOutlineLogout } from "react-icons/ai";
+
+export const navLinks = [
+  {
+    id: "codesnippets",
+    title: "Code Snippets",
+  },
+  {
+    id: "autocode",
+    title: "Auto Code",
+  },
+  {
+    id: "explaincode",
+    title: "Explain Code",
+  },
+  {
+    id: "translatecode",
+    title: "Translate Code",
+  },
+];
 
 const Navbar = () => {
   const [active, setActive] = useState("");
