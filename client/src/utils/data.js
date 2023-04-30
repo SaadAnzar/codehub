@@ -1,50 +1,50 @@
-import cpp from "../assets/cpp.svg";
-import python from "../assets/python.svg";
-import javascript from "../assets/javascript.svg";
-import haskell from "../assets/haskell.svg";
-import java from "../assets/java.svg";
-import csharp from "../assets/csharp.svg";
-import html from "../assets/html.svg";
-import css from "../assets/css.svg";
+import cpp from '../assets/cpp.svg'
+import python from '../assets/python.svg'
+import javascript from '../assets/javascript.svg'
+import haskell from '../assets/haskell.svg'
+import java from '../assets/java.svg'
+import csharp from '../assets/csharp.svg'
+import html from '../assets/html.svg'
+import css from '../assets/css.svg'
 
 export const programmingLangs = [
   {
-    name: "C++",
+    name: 'C++',
     icon: cpp,
   },
   {
-    name: "Python",
+    name: 'Python',
     icon: python,
   },
   {
-    name: "JavaScript",
+    name: 'JavaScript',
     icon: javascript,
   },
   {
-    name: "Haskell",
+    name: 'Haskell',
     icon: haskell,
   },
   {
-    name: "Java",
+    name: 'Java',
     icon: java,
   },
   {
-    name: "C#",
+    name: 'C#',
     icon: csharp,
   },
   {
-    name: "HTML",
+    name: 'HTML',
     icon: html,
   },
   {
-    name: "CSS",
+    name: 'CSS',
     icon: css,
   },
   {
-    name: "Others",
-    icon: "https://i.pinimg.com/236x/2e/63/c8/2e63c82dfd49aca8dccf9de3f57e8588.jpg",
+    name: 'Others',
+    icon: 'https://i.pinimg.com/236x/2e/63/c8/2e63c82dfd49aca8dccf9de3f57e8588.jpg',
   },
-];
+]
 
 export const feedQuery = `*[_type == "snippet"] | order(_createdAt desc) {
   _id,
@@ -71,7 +71,7 @@ export const feedQuery = `*[_type == "snippet"] | order(_createdAt desc) {
       image
     },
   },
-} `;
+} `
 
 export const snippetDetailQuery = (snippetId) => {
   const query = `*[_type == "snippet" && _id == '${snippetId}']{
@@ -108,12 +108,12 @@ export const snippetDetailQuery = (snippetId) => {
         image
       },
     }
-  }`;
-  return query;
-};
+  }`
+  return query
+}
 
 export const searchQuery = (searchTerm) => {
-  const query = `*[_type == "snippet" && (lower(title) == '${searchTerm.toLowerCase()}' || lower(language) == '${searchTerm.toLowerCase()}')]{
+  const query = `*[_type == "snippet" && title match '${searchTerm}*' || language match '${searchTerm}*' || about match '${searchTerm}*']{
     _id,
     title,
     language,
@@ -138,14 +138,14 @@ export const searchQuery = (searchTerm) => {
         image
       },
     },
-          }`;
-  return query;
-};
+  }`
+  return query
+}
 
 export const userQuery = (userId) => {
-  const query = `*[_type == "user" && _id == '${userId}']`;
-  return query;
-};
+  const query = `*[_type == "user" && _id == '${userId}']`
+  return query
+}
 
 export const userCreatedSnippetsQuery = (userId) => {
   const query = `*[ _type == 'snippet' && userId == '${userId}'] | order(_createdAt desc){
@@ -173,9 +173,9 @@ export const userCreatedSnippetsQuery = (userId) => {
         image
       },
     },
-  }`;
-  return query;
-};
+  }`
+  return query
+}
 
 export const userSavedSnippetsQuery = (userId) => {
   const query = `*[_type == 'snippet' && '${userId}' in save[].userId ] | order(_createdAt desc) {
@@ -203,6 +203,6 @@ export const userSavedSnippetsQuery = (userId) => {
         image
       },
     },
-  }`;
-  return query;
-};
+  }`
+  return query
+}
