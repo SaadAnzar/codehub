@@ -113,7 +113,7 @@ export const snippetDetailQuery = (snippetId) => {
 }
 
 export const searchQuery = (searchTerm) => {
-  const query = `*[_type == "snippet" && title match '${searchTerm}*' || language match '${searchTerm}*' || about match '${searchTerm}*']{
+  const query = `*[_type == "snippet" && title match '${searchTerm}*' || lower(language) == '${searchTerm.toLowerCase()}' || about match '${searchTerm}*']{
     _id,
     title,
     language,
