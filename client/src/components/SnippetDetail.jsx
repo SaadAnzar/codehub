@@ -14,11 +14,17 @@ import { v4 as uuidv4 } from 'uuid'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const SnippetDetail = () => {
-  const navigate = useNavigate()
-  const { snippetId } = useParams()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const [snippetDetail, setSnippetDetail] = useState()
   const [comment, setComment] = useState('')
   const [addingComment, setAddingComment] = useState(false)
+
+  const { snippetId } = useParams()
+
+  const navigate = useNavigate()
 
   const userInfo = fetchUser()
 
@@ -149,14 +155,14 @@ const SnippetDetail = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex mt-4 gap-4 mr-2">
+              <div className="flex justify-center items-center mt-4 gap-4">
                 <img
                   src={userInfo?.picture || avatar}
                   className="w-10 h-10 rounded-full"
                   alt={userInfo?.name}
                 />
                 <input
-                  className="flex-1 bg-gray-gradient border-gray-300 border-2 p-2 my-2 rounded-2xl focus:border-gray-100"
+                  className="flex-1 bg-gray-gradient border-gray-300 border-2 py-2 px-4 my-2 rounded-2xl focus:border-gray-100"
                   type="text"
                   placeholder="Add a comment"
                   value={comment}
@@ -168,7 +174,7 @@ const SnippetDetail = () => {
                 />
                 <button
                   type="button"
-                  className="bg-blue-gradient text-black rounded-[20px] px-4 py-2 font-semibold text-base outline-none"
+                  className="bg-blue-gradient text-black rounded-[20px] px-3 py-2 font-semibold text-base outline-none"
                   onClick={addComment}
                 >
                   {addingComment ? 'Adding...' : 'Add'}

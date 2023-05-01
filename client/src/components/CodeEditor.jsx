@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
+import React, { useState } from 'react'
+import Editor from 'react-simple-code-editor'
+import { highlight, languages } from 'prismjs/components/prism-core'
+import 'prismjs/components/prism-clike'
+import 'prismjs/components/prism-javascript'
 
 const codeSnippet = `function add(a, b) {
   return a + b;
@@ -10,22 +10,22 @@ const codeSnippet = `function add(a, b) {
 
 add(5, 10);
 // Output: 15
-`;
+`
 
 function CodeEditor() {
-  const [code, setCode] = useState(codeSnippet);
+  const [code, setCode] = useState(codeSnippet)
 
   return (
-    <div className='App'>
-      <div className='window'>
-        <div className='title-bar'>
-          <div className='title-buttons'>
-            <div className='title-button'></div>
-            <div className='title-button'></div>
-            <div className='title-button'></div>
+    <div className="App">
+      <div className="window">
+        <div className="title-bar">
+          <div className="title-buttons">
+            <div className="title-button"></div>
+            <div className="title-button"></div>
+            <div className="title-button"></div>
           </div>
         </div>
-        <div className='editor_wrap'>
+        <div className="editor_wrap">
           <Editor
             value={code}
             onValueChange={(code) => setCode(code)}
@@ -39,7 +39,7 @@ function CodeEditor() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default CodeEditor;
+export default CodeEditor

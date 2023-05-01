@@ -1,9 +1,9 @@
-import styles from "../style";
-import arrowUp from "../assets/arrow-up.svg";
-import { useAuth0 } from "@auth0/auth0-react";
+import styles from '../style'
+import arrowUp from '../assets/arrow-up.svg'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const GetStarted = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0()
 
   return (
     <div
@@ -14,18 +14,18 @@ const GetStarted = () => {
           className={`${styles.flexCenter} flex-col bg-primary hover:opacity-90 w-[100%] h-[100%] rounded-full`}
         >
           <div className={`${styles.flexStart} flex-row`}>
-            <p className='font-poppins font-medium text-[18px] leading-[23.4px]'>
-              <span className='text-gradient'>Let's</span>
+            <p className="font-poppins font-medium text-[18px] leading-[23.4px]">
+              <span className="text-gradient">Let's</span>
             </p>
             <img
               src={arrowUp}
-              alt='arrow-up'
-              className='w-[23px] h-[23px] object-contain'
+              alt="arrow-up"
+              className="w-[23px] h-[23px] object-contain"
             />
           </div>
 
-          <p className='font-poppins font-medium text-[18px] leading-[23.4px]'>
-            <span className='text-gradient'>Continue</span>
+          <p className="font-poppins font-medium text-[18px] leading-[23.4px]">
+            <span className="text-gradient">Continue</span>
           </p>
         </div>
       ) : (
@@ -33,23 +33,23 @@ const GetStarted = () => {
           className={`${styles.flexCenter} flex-col bg-primary hover:opacity-90 w-[100%] h-[100%] rounded-full`}
         >
           <div className={`${styles.flexStart} flex-row`}>
-            <p className='font-poppins font-medium text-[18px] leading-[23.4px]'>
-              <span className='text-gradient'>Get</span>
+            <p className="font-poppins font-medium text-[18px] leading-[23.4px]">
+              <span className="text-gradient">Get</span>
             </p>
             <img
               src={arrowUp}
-              alt='arrow-up'
-              className='w-[23px] h-[23px] object-contain'
+              alt="arrow-up"
+              className="w-[23px] h-[23px] object-contain"
             />
           </div>
 
-          <p className='font-poppins font-medium text-[18px] leading-[23.4px]'>
-            <span className='text-gradient'>Started</span>
+          <p className="font-poppins font-medium text-[18px] leading-[23.4px]">
+            <span className="text-gradient">Started</span>
           </p>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default GetStarted;
+export default GetStarted

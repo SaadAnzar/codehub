@@ -41,11 +41,9 @@ const Feed = ({ searchTerm, setSearchTerm }) => {
   return (
     <div className="sm:w-[60%] sm:order-1">
       <div className="flex justify-between items-center">
-        <Link to="/codesnippets">
-          <div className="font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient hover:bg-gray-600 p-2 px-3 sm:px-6 rounded-lg">
-            Code Snippets
-          </div>
-        </Link>
+        <div className="font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 px-3 sm:px-6 rounded-lg">
+          Code Snippets
+        </div>
         <Link to="/codesnippets/create-snippet">
           <div className="inline-flex gap-1 font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient hover:bg-gray-600 p-2 pr-4 rounded-lg">
             <IoMdAdd

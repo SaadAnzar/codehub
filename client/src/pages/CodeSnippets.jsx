@@ -10,16 +10,16 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { IoMdSearch } from 'react-icons/io'
 
 const CodeSnippets = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const { isAuthenticated } = useAuth0()
-  const navigate = useNavigate()
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
+  const [searchTerm, setSearchTerm] = useState('')
   const [toggleSidebar, setToggleSidebar] = useState(false)
+
+  const navigate = useNavigate()
+
+  const { isAuthenticated } = useAuth0()
 
   if (!isAuthenticated) navigate('/')
 

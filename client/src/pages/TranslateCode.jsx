@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-import axios from "axios";
-import Navbar from "../components/Navbar";
-import Spinner from "../components/Spinner";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import Editor from 'react-simple-code-editor'
+import { highlight, languages } from 'prismjs/components/prism-core'
+import 'prismjs/components/prism-clike'
+import 'prismjs/components/prism-javascript'
+import axios from 'axios'
+import Navbar from '../components/Navbar'
+import Spinner from '../components/Spinner'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useNavigate } from 'react-router-dom'
 
 const codeSnippet = `#include <iostream>
 using namespace std;
@@ -26,7 +26,7 @@ int main()
     }
     cout << "Reversed Number = " << reversedNum;
     return 0;
-}`;
+}`
 
 const translatedCode = `let num, reversedNum = 0, remainder;
 
@@ -39,22 +39,22 @@ while(num != 0) {
     num /= 10;
 }
 
-console.log("Reversed Number = " + reversedNum);`;
+console.log("Reversed Number = " + reversedNum);`
 
 const TranslateCode = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0)
+  }, [])
 
-  const navigate = useNavigate();
+  const [code, setCode] = useState(codeSnippet)
+  const [output, setOutput] = useState(translatedCode)
+  const [firstl, setFirstl] = useState('C++')
+  const [secondl, setSecondl] = useState('JavaScript')
 
-  const [code, setCode] = useState(codeSnippet);
-  const [output, setOutput] = useState(translatedCode);
-  const [firstl, setFirstl] = useState("C++");
-  const [secondl, setSecondl] = useState("JavaScript");
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/translate`, {
@@ -63,42 +63,42 @@ const TranslateCode = () => {
         second_language: secondl,
       })
       .then((res) => {
-        setOutput(res.data.output);
+        setOutput(res.data.output)
         // console.log(res.data.output);
       })
       .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const { isAuthenticated, isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <Spinner />;
+        console.log(err)
+      })
   }
 
-  if (!isAuthenticated) navigate("/");
+  const { isAuthenticated, isLoading } = useAuth0()
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (!isAuthenticated) navigate('/')
 
   return (
-    <div className='bg-primary text-white flex flex-col w-full min-h-screen'>
+    <div className="bg-primary text-white flex flex-col w-full min-h-screen">
       <Navbar />
 
-      <div className='sm:flex justify-between sm:mx-16 mx-6 my-4'>
-        <div className='sm:w-[40vw]'>
-          <div className='App'>
-            <div className='window'>
-              <div className='title-bar'>
-                <div className='title-buttons'>
+      <div className="sm:flex justify-between sm:mx-16 mx-6 my-4">
+        <div className="sm:w-[40vw]">
+          <div className="App">
+            <div className="window">
+              <div className="title-bar">
+                <div className="title-buttons">
                   <input
-                    type='text'
+                    type="text"
                     value={firstl}
-                    placeholder='Translate from...'
+                    placeholder="Translate from..."
                     onChange={(event) => setFirstl(event.target.value)}
-                    className='bg-inherit border-none outline-none text-white w-full capitalize px-4'
+                    className="bg-inherit border-none outline-none text-white w-full capitalize px-4"
                   />
                 </div>
               </div>
-              <div className='editor_wrap'>
+              <div className="editor_wrap">
                 <Editor
                   value={code}
                   onValueChange={(code) => setCode(code)}
@@ -115,41 +115,41 @@ const TranslateCode = () => {
 
           <button
             onClick={handleSubmit}
-            className='m-2 text-slate-300 bg-black-gradient border rounded-md px-4 py-2 font-medium text-base
-          hover:text-slate-500 focus:outline-none'
+            className="m-2 text-slate-300 bg-black-gradient border rounded-md px-4 py-2 font-medium text-base
+          hover:text-slate-500 focus:outline-none"
           >
-            Translate {""}
+            Translate {''}
             <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='bg-gray-700'
-              viewBox='0 0 24 24'
-              strokeWidth='1.5'
-              stroke='currentColor'
-              className='w-[18px] h-[18px] inline-block'
+              xmlns="http://www.w3.org/2000/svg"
+              fill="bg-gray-700"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-[18px] h-[18px] inline-block"
             >
               <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5'
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
               />
             </svg>
           </button>
         </div>
-        <div className='sm:w-[40vw]'>
-          <div className='App'>
-            <div className='window'>
-              <div className='title-bar'>
-                <div className='title-buttons'>
+        <div className="sm:w-[40vw]">
+          <div className="App">
+            <div className="window">
+              <div className="title-bar">
+                <div className="title-buttons">
                   <input
-                    type='text'
+                    type="text"
                     value={secondl}
-                    placeholder='Translate to...'
+                    placeholder="Translate to..."
                     onChange={(event) => setSecondl(event.target.value)}
-                    className='bg-inherit border-none outline-none text-white w-full capitalize px-4'
+                    className="bg-inherit border-none outline-none text-white w-full capitalize px-4"
                   />
                 </div>
               </div>
-              <div className='editor_wrap'>
+              <div className="editor_wrap">
                 <Editor
                   readOnly={true}
                   value={output}
@@ -167,7 +167,7 @@ const TranslateCode = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TranslateCode;
+export default TranslateCode
