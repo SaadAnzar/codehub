@@ -1,15 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { programmingLangs } from '../utils/data'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { IoIosArrowForward } from 'react-icons/io'
 import { fetchUser } from '../utils/fetchUser'
 
-const isNotActiveStyle =
-  'flex items-center gap-3 my-4 text-gray-400 hover:text-white transition-all duration-200 ease-in-out capitalize'
-const isActiveStyle =
-  'flex items-center gap-3 my-4 font-extrabold border-r-2 border-white transition-all duration-200 ease-in-out capitalize'
-
-const Languages = () => {
+const Languages = ({ closeToggle, setLanguageId }) => {
+  const [active, setActive] = useState('C++')
   const User = fetchUser()
 
   const handleCloseSidebar = () => {
@@ -22,12 +18,17 @@ const Languages = () => {
         {programmingLangs
           .slice(0, programmingLangs.length - 1)
           .map((language) => (
-            <NavLink
-              to={`/codesnippets/language/${language.name}`}
-              className={({ isActive }) =>
-                isActive ? isActiveStyle : isNotActiveStyle
-              }
-              onClick={handleCloseSidebar}
+            <li
+              className={`flex items-center gap-3 my-4 cursor-pointer transition-all duration-200 ease-in-out capitalize ${
+                active === language.name
+                  ? 'font-extrabold border-r-2 border-white'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+              onClick={() => {
+                setLanguageId(language.name)
+                setActive(language.name)
+                handleCloseSidebar
+              }}
               key={language.name}
             >
               <div className="inline-flex">
@@ -38,13 +39,13 @@ const Languages = () => {
                 />
                 {language.name}
               </div>
-            </NavLink>
+            </li>
           ))}
       </ul>
       {User && (
         <Link
           to={`/user-profile/${User.sub.substring(User?.sub.indexOf('|') + 1)}`}
-          className="flex mt-8 mb-3 gap-2 p-2 items-center text-dimWhite bg-black-gradient-2 hover:text-white opacity-70 rounded-lg shadow-lg mx-3"
+          className="flex mt-8 mb-3 gap-2 p-2 items-center text-dimWhite bg-black-gradient-2 hover:text-white opacity-90 rounded-lg shadow-lg mx-3"
           onClick={handleCloseSidebar}
         >
           <img

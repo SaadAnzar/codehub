@@ -14,6 +14,7 @@ const CodeSnippets = () => {
     window.scrollTo(0, 0)
   }, [])
 
+  const [languageId, setLanguageId] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [toggleSidebar, setToggleSidebar] = useState(false)
 
@@ -31,8 +32,8 @@ const CodeSnippets = () => {
         <div className="sm:w-[35%] sm:order-2 sm:mb-0 mb-6">
           <Chatbot />
         </div>
-        {/* Add Search here */}
         <div className="flex flex-col sm:w-[60%]">
+          {/* Add Search here */}
           <div className="flex justify-start items-center px-2 mb-4 rounded-lg bg-gray-gradient border-none outline-none focus-within:shadow-sm">
             <IoMdSearch fontSize={21} className="mx-1" />
             <input
@@ -53,7 +54,7 @@ const CodeSnippets = () => {
                 {/* <span className="text-gray-400 text-sm p-4">
                   Browse Languages
                 </span> */}
-                <Languages />
+                <Languages setLanguageId={setLanguageId} />
               </div>
               <div className="flex sm:hidden pb-3">
                 <HiMenu
@@ -73,12 +74,15 @@ const CodeSnippets = () => {
                     <div className="font-poppins font-medium text-base text-center mb-4 text-white bg-gray-gradient p-2 rounded-xl">
                       Languages
                     </div>
-                    <Languages closeToggle={setToggleSidebar} />
+                    <Languages
+                      closeToggle={setToggleSidebar}
+                      setLanguageId={setLanguageId}
+                    />
                   </div>
                 )}
               </div>
             </div>
-            <Feed searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <Feed searchTerm={searchTerm} languageId={languageId} />
           </div>
         </div>
       </div>

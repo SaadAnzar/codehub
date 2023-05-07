@@ -50,10 +50,7 @@ const Snippet = ({ snippet }) => {
   }
 
   return (
-    <li
-      key={_id}
-      onClick={() => navigate(`/codesnippets/snippet-detail/${_id}`)}
-    >
+    <li key={_id} onClick={() => navigate(`/snippet-detail/${_id}`)}>
       <div className="bg-gray-gradient px-3 py-2 mb-2 rounded-lg cursor-pointer">
         <div className="inline-flex font-[300] text-gray-400 font-poppins">
           <img

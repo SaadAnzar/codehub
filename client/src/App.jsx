@@ -15,15 +15,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/codesnippets" element={<CodeSnippets />} />
-      <Route
-        path="/codesnippets/language/:languageId"
-        element={<CodeSnippets />}
-      />
-      <Route path="/codesnippets/create-snippet" element={<CreateSnippet />} />
-      <Route
-        path="/codesnippets/snippet-detail/:snippetId"
-        element={<SnippetDetail />}
-      />
+      <Route path="/create-snippet" element={<CreateSnippet />} />
+      <Route path="/snippet-detail/:snippetId" element={<SnippetDetail />} />
       <Route path="/user-profile/:userId" element={<UserProfile />} />
       <Route path="/autocode" element={<AutoCode />} />
       <Route path="/explaincode" element={<ExplainCode />} />

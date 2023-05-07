@@ -137,6 +137,7 @@ const CreateSnippet = () => {
                         e.target.value.slice(1)
                     )
                   }
+                  maxLength={250}
                   placeholder="Write something about your code snippet"
                   className="bg-[#1a1e22] border-none outline-none w-full p-3 rounded-lg capitalize"
                 />

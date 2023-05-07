@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { IoMdAdd } from 'react-icons/io'
 import { client } from '../client'
 import { feedQuery, searchQuery } from '../utils/data'
 import Spinner from './Spinner'
 import Snippets from './Snippets'
 
-const Feed = ({ searchTerm, setSearchTerm }) => {
+const Feed = ({ searchTerm, languageId }) => {
   const [snippets, setSnippets] = useState()
   const [loading, setLoading] = useState(false)
-  const { languageId } = useParams()
 
   useEffect(() => {
     if (languageId) {
@@ -44,7 +43,7 @@ const Feed = ({ searchTerm, setSearchTerm }) => {
         <div className="font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 px-3 sm:px-6 rounded-lg">
           Code Snippets
         </div>
-        <Link to="/codesnippets/create-snippet">
+        <Link to="/create-snippet">
           <div className="inline-flex gap-1 font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient hover:bg-gray-600 p-2 pr-4 rounded-lg">
             <IoMdAdd
               style={{
