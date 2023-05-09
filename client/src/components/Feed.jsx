@@ -40,7 +40,10 @@ const Feed = ({ searchTerm, languageId }) => {
   return (
     <div className="sm:w-[60%] sm:order-1">
       <div className="flex justify-between items-center">
-        <div className="font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient p-2 px-3 sm:px-6 rounded-lg">
+        <div
+          className="font-poppins font-normal text-base text-center mb-4 text-white bg-gray-gradient hover:bg-gray-600 cursor-pointer p-2 px-3 sm:px-6 rounded-lg"
+          onClick={() => window.location.reload()}
+        >
           Code Snippets
         </div>
         <Link to="/create-snippet">

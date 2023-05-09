@@ -5,7 +5,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 import { fetchUser } from '../utils/fetchUser'
 
 const Languages = ({ closeToggle, setLanguageId }) => {
-  const [active, setActive] = useState('C++')
+  const [active, setActive] = useState(null)
   const User = fetchUser()
 
   const handleCloseSidebar = () => {
@@ -27,7 +27,7 @@ const Languages = ({ closeToggle, setLanguageId }) => {
               onClick={() => {
                 setLanguageId(language.name)
                 setActive(language.name)
-                handleCloseSidebar
+                handleCloseSidebar()
               }}
               key={language.name}
             >
@@ -46,7 +46,7 @@ const Languages = ({ closeToggle, setLanguageId }) => {
         <Link
           to={`/user-profile/${User.sub.substring(User?.sub.indexOf('|') + 1)}`}
           className="flex mt-8 mb-3 gap-2 p-2 items-center text-dimWhite bg-black-gradient-2 hover:text-white opacity-90 rounded-lg shadow-lg mx-3"
-          onClick={handleCloseSidebar}
+          onClick={() => handleCloseSidebar()}
         >
           <img
             src={User.picture}
