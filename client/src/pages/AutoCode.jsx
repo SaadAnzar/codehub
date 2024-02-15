@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import Navbar from '../components/Navbar'
-import Spinner from '../components/Spinner'
-import axios from 'axios'
-import Editor from 'react-simple-code-editor'
-import { highlight, languages } from 'prismjs/components/prism-core'
-import 'prismjs/components/prism-clike'
-import 'prismjs/components/prism-javascript'
-import { useAuth0 } from '@auth0/auth0-react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
+import Spinner from "../components/Spinner";
+import axios from "axios";
+import Editor from "react-simple-code-editor";
+import { highlight, languages } from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
-const inputPrompt = `Write code to setup an express app`
+const inputPrompt = `Write code to setup an express app`;
 
 const outputCode = `const express = require('express');
 const app = express();
@@ -20,40 +20,40 @@ app.get('/', (req, res) => {
 
 app.listen(3000, () => {
   console.log('Server is listening on port 3000');
-});`
+});`;
 
 const AutoCode = () => {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [input, setInput] = useState(inputPrompt)
-  const [output, setOutput] = useState(outputCode)
+  const [input, setInput] = useState(inputPrompt);
+  const [output, setOutput] = useState(outputCode);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/auto`, {
         prompt: input,
       })
       .then((res) => {
-        setOutput(res.data.output)
+        setOutput(res.data.output);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
-  const { isAuthenticated, isLoading } = useAuth0()
+  const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) navigate('/')
+  if (!isAuthenticated) navigate("/");
 
   return (
     <div className="bg-primary text-white flex flex-col w-full min-h-screen">
@@ -121,7 +121,7 @@ const AutoCode = () => {
         {/* <=========== CodeViewer ===========> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AutoCode
+export default AutoCode;

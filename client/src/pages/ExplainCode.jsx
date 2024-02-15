@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import Navbar from '../components/Navbar'
-import Spinner from '../components/Spinner'
-import Editor from 'react-simple-code-editor'
-import { highlight, languages } from 'prismjs/components/prism-core'
-import 'prismjs/components/prism-clike'
-import 'prismjs/components/prism-javascript'
-import axios from 'axios'
-import { useAuth0 } from '@auth0/auth0-react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
+import Spinner from "../components/Spinner";
+import Editor from "react-simple-code-editor";
+import { highlight, languages } from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const codeSnippet = `def factorial(n):
 if n == 0:
@@ -18,7 +18,7 @@ else:
 num = int(input("Enter a number: "));
 
 print("The factorial of", num, "is", factorial(num));
-`
+`;
 
 const explainedCode = `• This code is used to calculate the factorial of a given number.
 • The function 'factorial' takes an argument 'n' and checks if it is equal to 0.
@@ -26,41 +26,41 @@ const explainedCode = `• This code is used to calculate the factorial of a giv
 • If it is not equal to 0, it returns the value of 'n' multiplied by the result of the same function with argument 'n-1'.
 • The variable 'num' is used to store the input from the user.
 • The input is taken as an integer and stored in the variable 'num'.
-• Finally, the factorial of the number stored in 'num' is calculated using the function 'factorial' and printed out.`
+• Finally, the factorial of the number stored in 'num' is calculated using the function 'factorial' and printed out.`;
 
 const ExplainCode = () => {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [code, setCode] = useState(codeSnippet)
-  const [output, setOutput] = useState(explainedCode)
+  const [code, setCode] = useState(codeSnippet);
+  const [output, setOutput] = useState(explainedCode);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/explain`, {
         prompt: code,
       })
       .then((res) => {
-        setOutput(res.data.output)
+        setOutput(res.data.output);
         // console.log(res.data.output);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
-  const { isAuthenticated, isLoading } = useAuth0()
+  const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  if (!isAuthenticated) navigate('/')
+  if (!isAuthenticated) navigate("/");
 
   return (
     <div className="bg-primary text-white flex flex-col w-full min-h-screen">
@@ -96,7 +96,7 @@ const ExplainCode = () => {
             className="m-2 text-slate-300 bg-black-gradient border rounded-md px-4 py-2 font-medium text-base
           hover:text-slate-500 focus:outline-none"
           >
-            Explain {''}
+            Explain {""}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="bg-gray-700"
@@ -121,19 +121,19 @@ const ExplainCode = () => {
           </div>
           <div className="sm:h-[56vh] h-auto overflow-auto">
             <ul className="px-5 py-3">
-              {output.split('\n').map((out, index) => {
+              {output.split("\n").map((out, index) => {
                 return (
                   <li className="p-2" key={index}>
                     {out}
                   </li>
-                )
+                );
               })}
             </ul>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ExplainCode
+export default ExplainCode;
